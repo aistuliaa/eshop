@@ -57,7 +57,7 @@ nav ul li a:hover {
             top: 0;
             left: 0;
             background-color: #333;
-            color: white;
+            background: linear-gradient(to bottom, #000000, #00162c); /* Vertical gradient from top to bottom */            color: white;
             padding-top: 20px;
         }
 
@@ -101,4 +101,16 @@ nav ul li a:hover {
             font-size: 1.5em; /* Adjust the size as needed */
             margin-bottom: 20px;
         }
+ 
         
+/* Styling for large green title */
+.large-green-title {
+    font-size: 40vw; /* Adjust the size to your preference */
+    font-weight: bold;
+    color: green; /* Set the text color to green */
+    text-align: center; /* Center the title */
+    margin-top: 50px; /* Add space from the top */
+}
+
+
+       
