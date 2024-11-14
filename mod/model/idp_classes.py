@@ -2,7 +2,7 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Boolean, create_engine
 from sqlalchemy.orm import declarative_base
 
-engine = create_engine('sqlite:///db/duombaze.db', echo=False)
+engine = create_engine('sqlite:///mod/db/duombaze.db', echo=False)
 Base = declarative_base()
 
 current_time = datetime.utcnow
