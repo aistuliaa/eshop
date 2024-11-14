@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, url_for, flash
 from werkzeug.security import generate_password_hash
-from model import User, engine
+from mod.model.idp_classes import User, engine
 from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)

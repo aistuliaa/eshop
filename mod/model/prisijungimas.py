@@ -1,10 +1,12 @@
 # 1.Prisijungimas (neteisingai mėginant prisijungti 3 ar daugiau kartų turėtų būti užblokuotas prisijungimas)
 # pip install flask flask-login sqlalchemy
 
+# padariau, kad hashuoti slaptazodziai
+
 from flask import Flask, request, redirect, url_for, flash
 from sqlalchemy.orm import sessionmaker
 from werkzeug.security import generate_password_hash, check_password_hash
-from model import User, engine
+from mod.model.idp_classes import User, engine
 
 app = Flask(__name__)
 app.secret_key = 'dreamteam' 
