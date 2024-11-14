@@ -3,21 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ESHOP{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>{% block title %} Mano Svetainė {% endblock %}</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
-            <li><a href="{{ url_for('admin') }}">Apie Mus</a></li>
-            <li><a href="{{ url_for('prekės') }}">Kontaktai</a></li>
-        </ul>
-    </nav>
+    <header>
+        <h1>ESHOP</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                    {% if current_user.role == 'admin' %}
+                        <li><a href="{{ url_for('admin') }}">Admin Panel</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('prekes') }}">Kontaktai</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Čia bus atvaizduojamas kiekvieno puslapio turinys -->
-    <div>
+    <main>
+        <!-- Content block for each page -->
         {% block content %}{% endblock %}
-    </div>
+    </main>
 </body>
 </html>

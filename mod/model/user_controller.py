@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from model.idp_classes import User, engine
+from mod.model.idp_classes import User, engine
 from sqlalchemy.orm import sessionmaker
 
 Session = sessionmaker(bind=engine)
