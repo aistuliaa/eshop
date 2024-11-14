@@ -2,16 +2,13 @@ import datetime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-# Nepavyko su relativiu importu todel chatGPT sukure tai... bet tai veikia
-# from model.idp_classes import Base, User, Product, Cart, Order, OrderItem, Review, AuditLog 
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from model.idp_classes import Base, User, Product, Cart, Order, OrderItem, Review, AuditLog
+
+from mod.model.idp_classes import Base, User, Product, Cart, Order, OrderItem, Review, AuditLog 
 
 
 
-engine = create_engine('sqlite:///db/duombaze.db', echo=False)
+
+engine = create_engine('sqlite:///mod/db/duombaze.db', echo=False)
 Base.metadata.create_all(engine)  # Ensures all tables are created
 Session = sessionmaker(bind=engine)
 session = Session()
