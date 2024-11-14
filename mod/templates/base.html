@@ -15,27 +15,27 @@
             <li><a href="{{ url_for('prekes') }}">Prekės</a></li>
         </ul>
     </nav>
+
     <div class="sidebar">
-        <ul>
-            <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
-            <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
-            <li><a href="{{ url_for('reg') }}">Registruotis</a></li>
-            <li><a href="{{ url_for('prekes') }}">Prekės</a></li>
-        </ul>
+        <!-- Sidebar Title -->
+        <div class="sidebar-title">Pirkėjo meniu</div>
+        <div class="sidebar-menu">
+            <ul>
+                <li><a href="{{ url_for('loginout') }}">Atsijungti</a></li>
+                <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
+                <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
+            </ul>
+        </div>
     </div>
     
- 
-    <!-- Čia bus atvaizduojamas kiekvieno puslapio turinys -->
-   
-    <div>
+    <!-- Content Section -->
+    <div class="content">
         {% block content %}
-        <div class="content">
-            <ul>
-                    {% for preke in prekes %}
-                        <li>{{ preke }}</li>
-                    {% endfor %}
-                </ul>
-
+        <ul>
+            {% for preke in prekes %}
+                <li>{{ preke }}</li>
+            {% endfor %}
+        </ul>
         {% endblock %}
     </div>
 </body>

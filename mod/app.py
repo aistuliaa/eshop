@@ -26,6 +26,17 @@ def pirkejas():
     
     return render_template('pirkejas.html')
 
+@app.route('/loginout')
+def loginout():    
+    return render_template('loginout.html')
+
+@app.route('/balansas')
+def balansas():    
+    return render_template('balansas.html')
+
+@app.route('/add_balansas')
+def add_balansas():    
+    return render_template('add_balansas.html')
 # Aplikacijos paleidimas
 if __name__ == '__main__':
     app.run(debug=True)
