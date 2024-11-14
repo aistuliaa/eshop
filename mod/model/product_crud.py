@@ -82,4 +82,4 @@ if __name__ == "__main__":
 
     update_product(product_id=1, price=12.99, stock=45)
 
-    delete_product(product_id=1)
+    delete_product(product_id=3)
