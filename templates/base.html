@@ -15,10 +15,20 @@
             <li><a href="{{ url_for('prekes') }}">Prekės</a></li>
         </ul>
     </nav>
-
+    
+ 
     <!-- Čia bus atvaizduojamas kiekvieno puslapio turinys -->
+   
     <div>
-        {% block content %}{% endblock %}
+        {% block content %}
+        <div class="content">
+            <ul>
+                    {% for preke in prekes %}
+                        <li>{{ preke }}</li>
+                    {% endfor %}
+                </ul>
+
+        {% endblock %}
     </div>
 </body>
 </html>
