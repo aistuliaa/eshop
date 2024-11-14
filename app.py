@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from flask import render_template, redirect, url_for
 from flask import Flask
 from model.user_controller import user_blueprint
@@ -12,3 +13,32 @@ def admin_dashboard():
     if current_user.role != 'admin':
         return redirect(url_for('profile'))
     return render_template('admin/dashboard.html')
+=======
+from flask import Flask, render_template
+
+# Inicializuojame Flask aplikaciją
+app = Flask(__name__)
+
+# Sukuriame pagrindinį maršrutą, kuris grąžins pagrindinį puslapį
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/prekes')
+def prekes():
+    prekes = ["NOTV", "MTV", "TV"]
+    return render_template('prekes.html', prekes=prekes)
+
+@app.route('/admin')
+def admin():    
+    return render_template('admin.html')
+
+@app.route('/pirkejas')
+def pirkejas():
+    
+    return render_template('pirkejas.html')
+
+# Aplikacijos paleidimas
+if __name__ == '__main__':
+    app.run(debug=True)
+>>>>>>> 948e56eaca4c44dbca34edd0d4095695e753940e
