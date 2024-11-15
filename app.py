@@ -1,6 +1,13 @@
-from flask import Flask, render_template, redirect, url_for
-from flask_login import LoginManager, current_user, login_required
-from mod.model.user_controller import user_blueprint
+from flask import Flask, render_template
+from sqlalchemy.orm import sessionmaker
+from mod.populate_db import engine, Product  # Importuokite engine ir Product
+
+# Inicializuojame Flask aplikaciją
+app = Flask(__name__)
+
+# SQLAlchemy sesijos konfigūracija
+Session = sessionmaker(bind=engine)
+session = Session()
 
 app = Flask(__name__, template_folder='mod/templates')
 
