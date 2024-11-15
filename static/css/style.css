@@ -38,7 +38,7 @@ nav ul li a:hover {
 }
 
 /* Pagrindinio turinio centravimas */
-.content {
+.main-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -176,3 +176,36 @@ nav ul li a:hover {
     animation: fadeInUp 0.5s forwards 1.5s; /* Slight delay for image */
 }
 
+.products ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.products li {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+.products li h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #012413;
+}
+
+.products li p {
+    margin: 10px 0;
+}
+
+.products li p:last-of-type {
+    font-weight: bold;
+    color: #555;
+}
