@@ -176,3 +176,26 @@ nav ul li a:hover {
     animation: fadeInUp 0.5s forwards 1.5s; /* Slight delay for image */
 }
 
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-row label {
+    width: 120px; /* Adjust width to align labels */
+    text-align: right;
+    margin-right: 10px;
+    white-space: nowrap; /* Prevent label text wrapping */
+}
+
+.form-row input[type="text"],
+.form-row input[type="password"] {
+    width: 100%; /* Make input take remaining space */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
