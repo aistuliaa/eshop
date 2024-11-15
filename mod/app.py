@@ -9,9 +9,9 @@ def home():
     return render_template('index.html')
 
 @app.route('/cargo')
-def prekes():
-    prekes = ["NOTV", "MTV", "TV"]
-    return render_template('prekes.html', prekes=prekes)
+def get_all_products():
+    products = session.query(Product).all()
+    return render_template('prekes.html', products=products)
 
 @app.route('/login')
 def login():    
