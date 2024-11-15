@@ -1,9 +1,10 @@
 # 1.Prisijungimas (neteisingai mėginant prisijungti 3 ar daugiau kartų turėtų būti užblokuotas prisijungimas)
 # pip install flask flask-login sqlalchemy
+# padariau ir kad atsijungimas butu, o po to mestu i pagr puslapi
 
 # padariau, kad hashuoti slaptazodziai
 
-from flask import Flask, request, redirect, url_for, flash
+from flask import Flask, request, redirect, url_for, flash, session as flask_session
 from sqlalchemy.orm import sessionmaker
 from werkzeug.security import generate_password_hash, check_password_hash
 from mod.model.idp_classes import User, engine
@@ -24,10 +25,10 @@ def login():
     if user is None:
         flash('Vartotojas su tokiu prisijungimo vardu nerastas')
         return redirect(url_for('login'))
-    if user.is_bloked:
+    if user.is_blocked:
         flash('Prisijungimas užblokuotas dėl per daug nesėkmingų bandymų')
     if check_password_hash(user.password, password):
-        user.failed_logns = 0
+        user.failed_logins = 0
         session.commit()
         flash('Prisijungimas sėkmingas')
         return redirect(url_for('home'))
@@ -49,6 +50,11 @@ def login_page():
             <input type="submit" value="Prisijungti">
         </form>
     '''
+@app.route('/logout')
+def logout():
+    flask_session.pop('user_id', None)
+    flash('Sėkmingai atsijungėte.')
+    return redirect(url_for('login'))
 
 @app.route('/home')
 def home():
