@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="content">
-<ul>
+<ul> products = session.query(Product).all()
         {% for preke in prekes %}
             <li>{{ preke }}</li>
         {% endfor %}
