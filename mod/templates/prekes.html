@@ -1,9 +1,25 @@
 {% extends 'base.html' %}
 
+{% block title %}Prekių sąrašas{% endblock %}
+
 {% block content %}
-    <ul>
-        {% for student in students %}
-            <li>{{ student }}</li>
-        {% endfor %}
-    </ul>
+    <h1>Visos prekės:</h1>
+    <p>Jas galima pirkti, pirkti, pirkti!</p>
+
+    <div class="products">
+        {% if products %}
+            <ul>
+                {% for product in products %}
+                    <li>
+                        <h2>{{ product.name }}</h2>
+                        <p>{{ product.description }}</p>
+                        <p>Kaina: {{ product.price }} €</p>
+                        <p>Likęs kiekis: {{ product.stock }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Šiuo metu prekių nėra.</p>
+        {% endif %}
+    </div>
 {% endblock %}
