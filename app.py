@@ -1,12 +1,14 @@
 from flask import Flask, render_template, url_for, redirect
 from flask_login import LoginManager, current_user, login_required
 from mod.model.user_controller import user_blueprint
+from mod.model.registracija import registracija_blueprint
 from mod.db import session
 from mod.model.idp_classes import Product
 
 app = Flask(__name__, template_folder='mod/templates')
+app.secret_key = 'dreamteam'
 
-app.register_blueprint(user_blueprint)
+app.register_blueprint(registracija_blueprint, url_prefix='/')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
