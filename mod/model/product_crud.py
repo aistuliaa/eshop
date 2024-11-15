@@ -76,10 +76,10 @@ if __name__ == "__main__":
 
     add_product(name="Sample Product", description="This is a test product.", price=10.99, stock=50, category="Test")
 
-    products = get_all_products()
-    for product in products:
-        print(product.name, product.price)
+    # products = get_all_products()
+    # for product in products:
+    #     print(product.name, product.price)
 
-    update_product(product_id=1, price=12.99, stock=45)
+    # update_product(product_id=1, price=12.99, stock=45)
 
-    delete_product(product_id=3)
+    # delete_product(product_id=3)

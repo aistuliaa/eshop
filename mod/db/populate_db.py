@@ -8,7 +8,8 @@ engine = create_engine('sqlite:///mod/db/duombaze.db', echo=False)
 Base.metadata.create_all(engine)  # Ensures all tables are created
 Session = sessionmaker(bind=engine)
 session = Session()
-# Base.metadata.drop_all(bind=engine) # Istrina visus tables
+# Base.metadata.drop_all(bind=engine) # Istrina visus tables 1/2
+# session.commit() # Istrina visus tables 2/2
 try:
     user1 = User(username="user1", email="user1@example.com", password="hashed_password1")
     user2 = User(username="user2", email="user2@example.com", password="hashed_password2", balance=100.0)
@@ -17,7 +18,7 @@ try:
     session.add_all([user1, user2, admin])
 
 
-    product1 = Product(name="Laptop", description="A high-performance laptop", price=1500.0, stock=5, category="Electronics")
+    product1 = Product(name="Laptop", description="A high-performance laptop", price=15.0, stock=5, category="Electronics")
     product2 = Product(name="Smartphone", description="A smartphone with a great camera", price=800.0, stock=10, category="Electronics")
     product3 = Product(name="Headphones", description="Noise-cancelling headphones", price=200.0, stock=15, category="Accessories")
 
