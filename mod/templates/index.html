@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Prekių pasaulis{% endblock %}
+
+{% block content %}
+    
+
+    <!-- Pagrindinis turinys -->
+   
+
+    <div class="main-content">
+        <h1>Sveiki atvykę į Prekių pasaulį!</h1>
+        <p>Pirkite, pirkite, pirkite</p>
+        <img src="{{ url_for('static', filename='images/pirk.webp') }}" alt="Pirk">
+    </div>
+{% endblock %}

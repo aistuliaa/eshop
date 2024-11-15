@@ -1,0 +1,15 @@
+{% extends "pagrindinis.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2 style="color: blue;">Admin meniu</h2>
+<ul
+    <li><a href="#">Pridėti prekę</a></li>
+    <li><a href="#">Išimti prekę</a></li>
+    <li><a href="{{ url_for('user.view.users') }}">Pirkėjų sąrašas</a></li>
+    <li><a href="{{ url_for('user.view.users') }}">Ištrinti pirkėją</a></li>
+    <li><a href="#">Prekių statistika</a></li>
+    <li><a href="/logout" style="color: gray;">Atsijungti</a></li>
+    <ul>
+        {% endblock %}

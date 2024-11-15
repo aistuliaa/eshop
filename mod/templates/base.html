@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{% block title %}Mano Svetainė{% endblock %}</title>
+</head>
+<body>
+    <!-- Main Navigation -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
+            <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
+            <li><a href="{{ url_for('reg') }}">Registruotis</a></li>
+            <li><a href="{{ url_for('get_all_products') }}">Prekės</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sidebar for user menu -->
+    <div class="sidebar">
+        <h2 class="sidebar-title">Pirkėjo meniu</h2>
+        <ul>
+            <li><a href="{{ url_for('loginout') }}">Atsijungti</a></li>
+            <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
+            <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,27 +1,64 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
+from flask_login import LoginManager, current_user, login_required
+from mod.model.user_controller import user_blueprint
+from mod.db import session
+from mod.model.idp_classes import Product
 
-# Inicializuojame Flask aplikaciją
-app = Flask(__name__)
+app = Flask(__name__, template_folder='mod/templates')
 
-# Sukuriame pagrindinį maršrutą, kuris grąžins pagrindinį puslapį
+app.register_blueprint(user_blueprint)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    from mod.model.idp_classes import User
+    return User.get(user_id)
+
+# Routes
 @app.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/prekes')
-def prekes():
-    prekes = ["NOTV", "MTV", "TV"]
-    return render_template('prekes.html', prekes=prekes)
+@app.route('/cargo')
+def get_all_products():
+    from mod.model.idp_classes import Product
+    from mod.db import session
+    products = session.query(Product).all()
+    return render_template('prekes.html', products=products)
 
-@app.route('/admin')
-def admin():    
-    return render_template('admin.html')
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/reg')
+def reg():
+    return render_template('reg.html')
 
 @app.route('/pirkejas')
 def pirkejas():
-    
     return render_template('pirkejas.html')
 
-# Aplikacijos paleidimas
+@app.route('/loginout')
+def loginout():
+    return render_template('loginout.html')
+
+@app.route('/balansas')
+def balansas():
+    return render_template('balansas.html')
+
+@app.route('/add_balansas')
+def add_balansas():
+    return render_template('add_balansas.html')
+
+@app.route('/admin')
+@login_required
+def admin_dashboard():
+    if current_user.role != 'admin':
+        return redirect(url_for('profile'))
+    return render_template('admin/dashboard.html')
+
+# Run the application
 if __name__ == '__main__':
     app.run(debug=True)
