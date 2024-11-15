@@ -207,7 +207,7 @@ h1 {
 .products li h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
-    color: #007BFF;
+    color: #022316;
 }
 
 .products li p {
@@ -217,4 +217,96 @@ h1 {
 .products li p:last-of-type {
     font-weight: bold;
     color: #555;
+}
+
+
+
+/* Formos konteineris */
+.form-container {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+/* Formos antraštė */
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Formos eilutės */
+.form-row {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Etiketės */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Įvesties laukeliai */
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Mygtukas */
+input[type="submit"] {
+    background: #012804;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #032804;
+}
+
+/* Mažas akcentas */
+.form-container p {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 10px;
+}
+
+
+
+/* Paveikslėlio stilius */
+.main-content img {
+    max-width: 100%; /* Paveikslėlis neužims daugiau vietos nei jo tėvinis elementas */
+    height: auto;   /* Išlaiko proporcijas */
+    border-radius: 5px; /* Apvalina paveikslėlio kraštus (nebūtina) */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Šešėlis (nebūtina) */
+}
+
+/* H1 stilius */
+.main-content h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Paragrafo stilius */
+.main-content p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
 }
