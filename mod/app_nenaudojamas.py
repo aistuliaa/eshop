@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+""" from flask import Flask, render_template
 
 # Inicializuojame Flask aplikaciją
 app = Flask(__name__)
@@ -39,4 +39,4 @@ def add_balansas():
     return render_template('add_balansas.html')
 # Aplikacijos paleidimas
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) """

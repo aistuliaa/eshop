@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
 
+{% block title %}Prekių sąrašas{% endblock %}
+
 {% block content %}
-<div class="content">
-<ul> products = session.query(Product).all()
-        {% for preke in prekes %}
-            <li>{{ preke }}</li>
-        {% endfor %}
-    </ul>
+    <h1>Sveiki atvykę į Prekių pasaulį!</h1>
+    <p>Pirkite, pirkite, pirkite</p>
+
+    <div class="products">
+        {% if products %}
+            <ul>
+                {% for product in products %}
+                    <li>
+                        <h2>{{ product.name }}</h2>
+                        <p>{{ product.description }}</p>
+                        <p>Kaina: {{ product.price }} €</p>
+                        <p>Likęs kiekis: {{ product.stock }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Šiuo metu prekių nėra.</p>
+        {% endif %}
+    </div>
 {% endblock %}

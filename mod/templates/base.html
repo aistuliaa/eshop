@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>{% block title %} Mano Svetainė {% endblock %}</title>
+    <title>{% block title %}Mano Svetainė{% endblock %}</title>
 </head>
 <body>
+    <!-- Main Navigation -->
     <nav>
         <ul>
             <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
@@ -16,30 +17,19 @@
         </ul>
     </nav>
 
+    <!-- Sidebar for user menu -->
     <div class="sidebar">
-        <!-- Sidebar Title -->
-        <div class="sidebar-title">Pirkėjo meniu</div>
-        <div class="sidebar-menu">
-            <ul>
-                <li><a href="{{ url_for('loginout') }}">Atsijungti</a></li>
-                <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
-                <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
-            </ul>
-        </div>
+        <h2 class="sidebar-title">Pirkėjo meniu</h2>
+        <ul>
+            <li><a href="{{ url_for('loginout') }}">Atsijungti</a></li>
+            <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
+            <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
+        </ul>
     </div>
 
-
-    
-    
-    <!-- Content Section -->
-    <div class="content">
-        {% block content %}
-        <ul>
-            {% for preke in prekes %}
-                <li>{{ preke }}</li>
-            {% endfor %}
-        </ul>
-        {% endblock %}
+    <!-- Main Content Section -->
+    <div class="main-content">
+        {% block content %}{% endblock %}
     </div>
 </body>
 </html>
