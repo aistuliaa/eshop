@@ -1,7 +1,9 @@
 body {
-    background: linear-gradient(to bottom, #ffffff, #909192), url('images/fonfon.webp');
+    background: linear-gradient(to bottom, #ffffff, #909192), url('fonfon.jpg');
     background-repeat: repeat;
-    background-size: auto;  /* Optional: set the size of the background image */
+    background-size: auto;
+    background-size: cover; /* Paveikslėlis užims visą ekraną, išlaikant proporcijas */
+    background-attachment: fixed; /* Fiksuoja paveikslėlį ekrano fone, kad jis neslinktų */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -43,183 +45,181 @@ nav ul li a:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 80vh; /* Palieka vietos meniu */
+    min-height: 80vh;
     text-align: center;
-    
-
+    background: url('fonfon.jpg');
+    background-size: cover; /* Paveikslėlis užims visą ekraną, išlaikant proporcijas */
+    background-attachment: fixed; /* Fiksuoja paveikslėlį ekrano fone, kad jis neslinktų */
+    background-repeat: repeat;
+    background-size: auto;
+    padding: 20px;
 }
 
-        /* Sidebar styles */
-        .sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #333;
-            background: linear-gradient(to bottom, #000000, #00162c); /* Vertical gradient from top to bottom */            color: white;
-            padding-top: 20px;
-        }
+.main-content h1,
+.main-content p {
+    background-color: white; /* Baltas fonas */
+    padding: 10px;  /* Tarpas aplink tekstą */
+    border-radius: 5px;  /* Apvalūs kampai */
+}
 
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
+/* Sidebar styles */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    background: linear-gradient(to bottom, #000000, #00162c);
+    color: white;
+    padding-top: 20px;
+}
 
-        .sidebar ul li {
-            padding: 15px;
-            text-align: center;
-        }
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
 
-        .sidebar ul li a {
-            color: white;
-            text-decoration: none;
-            display: block;
-        }
+.sidebar ul li {
+    padding: 15px;
+    text-align: center;
+}
 
-        .sidebar ul li a:hover {
-            background-color: #575757;
-        }
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
 
-        /* Main content area */
-        .main-content {
-            margin-left: 250px;
-            padding: 20px;
-        }
+.sidebar ul li a:hover {
+    background-color: #575757;
+}
 
-        .content ul {
-            padding: 0;
-            list-style-type: none;
-        }
+/* Main content area */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+}
 
-        .content ul li {
-            margin-bottom: 10px;
-        }
+/* Sidebar title */
+.sidebar-title {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
 
-        .sidebar-title {
-            text-align: center;
-            font-size: 1.5em; /* Adjust the size as needed */
-            margin-bottom: 20px;
-        }
- 
-        
 /* Styling for large green title */
 .large-green-title {
     font-size: 40vw;
     font-weight: bold;
-    color: green; /* Initial color */
+    color: green;
     text-align: center;
     margin-top: 0px;
-    animation: colorChange 3s infinite; /* Color animation with 3s duration and infinite loop */
+    animation: colorChange 3s infinite;
 }
 
 /* Styling for large green balance */
 .large-green-balance {
     font-size: 5vw;
     font-weight: bold;
-    color: rgb(36, 49, 36); /* Initial dark green color */
+    color: rgb(36, 49, 36);
     text-align: center;
     margin-top: 10px;
-    animation: colorChange 3s infinite; /* Color animation with 3s duration and infinite loop */
+    animation: colorChange 3s infinite;
 }
 
 /* Color change animation */
 @keyframes colorChange {
     0% {
-        color: green; /* Initial color */
+        color: green;
     }
     50% {
-        color: rgb(48, 95, 64); /* Midway color */
+        color: rgb(48, 95, 64);
     }
     100% {
-        color:  green; /* Final color */
+        color: green;
     }
 }
 
-
-
 /* Main content animation */
 .main-content {
-    margin-left: 250px; /* Matches sidebar width */
+    margin-left: 250px;
     padding: 20px;
-    background-color: white; /* Optional: Adds a background for contrast */
     min-height: 100vh;
 }
 
 /* Slide-up and fade-in animation */
 @keyframes fadeInUp {
     0% {
-        opacity: 0; /* Start invisible */
-        transform: translateY(30px); /* Start below the view */
+        opacity: 0;
+        transform: translateY(30px);
     }
     100% {
-        opacity: 1; /* End visible */
-        transform: translateY(0); /* End at normal position */
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
 /* Animation for heading (h1) */
 .main-content h1 {
     opacity: 0;
-    animation: fadeInUp 1.5s forwards 0.5s; /* Slight delay for h1 */
+    animation: fadeInUp 1.5s forwards 0.5s;
 }
 
 /* Animation for paragraph (p) */
 .main-content p {
     opacity: 0;
-    animation: fadeInUp 1.5s forwards 1s; /* Slight delay for p */
+    animation: fadeInUp 1.5s forwards 1s;
 }
 
 /* Animation for image */
 .main-content img {
     opacity: 0;
-    animation: fadeInUp 0.5s forwards 1.5s; /* Slight delay for image */
+    animation: fadeInUp 0.5s forwards 1.5s;
 }
 
-/* Bendras stilius */
-
-
-h1 {
-    text-align: center;
-    margin-top: 20px;
+/* H1 stilius */
+.main-content h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
     color: #333;
 }
 
-.products ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+/* Paragrafo stilius */
+.main-content p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
 }
 
-.products li {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Puslapio galva */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f9;
     padding: 20px;
-    width: 300px;
+    border-bottom: 2px solid #ccc;
     text-align: center;
 }
 
-.products li h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #022316;
+.header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+    background-color: white;  /* Baltas fonas */
+    padding: 10px;  /* Tarpai aplink tekstą */
+    border-radius: 5px;  /* Apvalūs kampai */
 }
 
-.products li p {
-    margin: 10px 0;
+.header img {
+    width: 100%;
+    height: auto;
+    max-width: 1366px;
+    margin-right: 20px;
+    margin-left: 250px;
+    padding: 20px;
 }
-
-.products li p:last-of-type {
-    font-weight: bold;
-    color: #555;
-}
-
-
 
 /* Formos konteineris */
 .form-container {
@@ -287,50 +287,51 @@ input[type="submit"]:hover {
     margin-top: 10px;
 }
 
-
-
 /* Paveikslėlio stilius */
 .main-content img {
-    max-width: 100%; /* Paveikslėlis neužims daugiau vietos nei jo tėvinis elementas */
-    height: auto;   /* Išlaiko proporcijas */
-    border-radius: 5px; /* Apvalina paveikslėlio kraštus (nebūtina) */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Šešėlis (nebūtina) */
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* H1 stilius */
-.main-content h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
+/* Bendras h1 stilius */
+h1 {
+    text-align: center;
+    margin-top: 20px;
     color: #333;
 }
 
-/* Paragrafo stilius */
-.main-content p {
-    font-size: 1.2em;
-    color: #555;
-    margin-bottom: 20px;
+.products ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
-
-/* Puslapio galva */
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f9;
+.products li {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    border-bottom: 2px solid #ccc;
+    width: 300px;
     text-align: center;
 }
 
-.header img {
-    max-width: 1366px; /* Paveikslėlio plotis */
-    height: auto; /* Automatinis aukštis */
-    margin-right: 20px; /* Tarpas tarp paveikslėlio ir teksto */
+.products li h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #022316;
 }
 
-.header h1 {
-    font-size: 2rem;
-    color: #333;
-    margin: 0;
+.products li p {
+    margin: 10px 0;
+}
+
+.products li p:last-of-type {
+    font-weight: bold;
+    color: #555;
 }
