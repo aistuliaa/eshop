@@ -61,6 +61,30 @@ def admin_dashboard():
         return redirect(url_for('profile'))
     return render_template('admin/dashboard.html')
 
+# admin meniu
+
+@app.route('/new_cargo')
+def new_cargo():
+    return render_template('new_cargo.html')
+
+@app.route('/add_cargo')
+def add_cargo():
+    return render_template('add_cargo.html')
+
+@app.route('/delete_cargo')
+def delete_cargo():
+    return render_template('delete_cargo.html')
+
+@app.route('/delete_user')
+def delete_user():
+    return render_template('delete_user.html')
+
+@app.route('/stat_cargo')
+def stat_cargo():
+    return render_template('stat_cargo.html')
+
+
+
 # Run the application
 if __name__ == '__main__':
     app.run(debug=True)

@@ -32,8 +32,18 @@
             <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
             <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
         </ul>
-    </div>
+    
+            <h2 class="sidebar-title">Admin meniu</h2>
+        <ul>
+            <li><a href="{{ url_for('new_cargo') }}">Pridėti naują prekę</a></li>
+            <li><a href="{{ url_for('add_cargo') }}">Papildyti prekių kiekį</a></li>
+            <li><a href="{{ url_for('delete_cargo') }}">Pašalinti prekę</a></li>
+            <li><a href="{{ url_for('delete_user') }}">Ištrinti sistemos vartotoją</a></li>
+            <li><a href="{{ url_for('stat_cargo') }}">Prekių statistika</a></li>
 
+
+        </ul>
+    </div>
     <!-- Main Content Section -->
     <div class="main-content">
         {% block content %}{% endblock %}
