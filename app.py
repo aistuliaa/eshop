@@ -63,6 +63,11 @@ def admin_dashboard():
 
 # admin meniu
 
+
+@app.route('/view_cart')
+def view_cart():
+    return render_template('view_cart.html')
+
 @app.route('/new_cargo')
 def new_cargo():
     return render_template('new_cargo.html')

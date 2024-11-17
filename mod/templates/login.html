@@ -3,6 +3,7 @@
 {% block title %}Prisijungti{% endblock %}
 
 {% block content %}
+
 <h1>Prisijungti</h1>
 <div class="form-container">
     <form method="POST" action="{{ url_for('login') }}">
@@ -18,5 +19,6 @@
             <input type="submit" value="Prisijungti">
         </div>
     </form>
+    <p><a href="{{ url_for('registracija.register') }}">Neturite paskyros? Registruokitės</a></p>
 </div>
 {% endblock %}

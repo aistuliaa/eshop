@@ -1,28 +1,31 @@
 
 
 body {
-    background: linear-gradient(to bottom, #ffffff, #909192), url('fonfon.jpg');
-    background-repeat: repeat;
-    background-size: auto;
+    background: url('fonfon.jpg');
     background-size: cover; /* Paveikslėlis užims visą ekraną, išlaikant proporcijas */
     background-attachment: fixed; /* Fiksuoja paveikslėlį ekrano fone, kad jis neslinktų */
+    background-repeat: repeat;
+    background-size: auto;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Meniu stilius */
 nav {
+    opacity: 0.8; /* 80% nepermatomumas */
     background-color: #333;
     background: linear-gradient(to bottom, #575A49, #ABA68D);
     overflow: hidden;
-    position: fixed; /* Meniu prilips prie viršaus */
-    top: 300px; /* Nustato, kad meniu prilips prie viršaus */
-    width: 100%; /* Užtikrina, kad meniu užims visą plotį */
+    position: fixed;
+    top: 300px;
+    width: 100%;
     height: 70px;
-    z-index: 8; /* Užtikrina, kad meniu bus virš kitų elementų */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Nedidelis šešėlis, kad meniu išsiskirtų */
+    z-index: 8;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
 }
+
+
+
 
 /* Meniu elementų stilius */
 nav ul {
@@ -170,12 +173,34 @@ nav ul li a:hover {
     
 }
 
-/* Sidebar title */
 .sidebar-title {
     text-align: center;
     font-size: 1.5em;
     margin-bottom: 20px;
+    background: url('fonfon.jpg') no-repeat center center;
+    background-size: cover; /* Pritaikytas fono dydis */
+    color: rgb(255, 255, 255); /* Balta spalva, kad geriau matytųsi */
+    padding: 10px;
+    border-radius: 8px;
+    position: relative; /* Būtina, kad pseudo elementai veiktų */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); /* Šešėlis aplink tekstą */
 }
+
+.sidebar-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit; /* Paveldime foną iš pagrindinės elementų */
+    filter: blur(15px); /* Mažesnis miglojimo efektas */
+    z-index: -1; /* Už tekstą */
+    border-radius: 8px; /* Suapvalinti kampai */
+}
+
+
+
 
 /* Styling for large green title */
 .large-green-title {
@@ -199,13 +224,13 @@ nav ul li a:hover {
     font-weight: bold;
     color: rgb(36, 49, 36);
     text-align: center;
-    margin-top: 10px;
+    margin-top: 5px;
     animation: colorChange 3s infinite;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Teksto šešėlis */
     display: inline-block; /* Užtikrina, kad fonas apgaubs tik tekstą */
-    padding: 10px; /* Sukuria tarpą tarp teksto ir kraštų */
+    padding: 25px; /* Sukuria tarpą tarp teksto ir kraštų */
     background-color: rgba(255, 255, 255, 0.8); /* Permatomas baltas fonas */
-    border-radius: 5px; /* Užapvalinti kampai */
+    border-radius: 10px; /* Užapvalinti kampai */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Šešėlis aplink foną */
 }
 
@@ -225,7 +250,7 @@ nav ul li a:hover {
 
 .main-content {
     margin-left: 250px;  /* Makes space for the sidebar */
-    margin-top: 50px;   /* Adjust this value to be the height of your fixed header and navbar */
+    margin-top: 20px;   /* Adjust this value to be the height of your fixed header and navbar */
     padding: 20px;
     min-height: 100vh;
     text-align: center;
@@ -277,7 +302,7 @@ nav ul li a:hover {
 }
 
 .header {
-    position: sticky; /* Keep the header fixed */
+    position: relative; /* Keep the header fixed */
     top: 50px; /* Ensures it stays at the top */
     left: 0;
     width: 100%;
@@ -317,7 +342,6 @@ nav ul li a:hover {
 }
 
 
-/* Header img - aiškus paveikslėlis */
 .header img {
     width: 100%;
     height: auto;
@@ -325,9 +349,25 @@ nav ul li a:hover {
     margin-right: 20px;
     margin-left: 250px;
     padding: 20px;
-    z-index: 1; /* Paveikslėlis bus virš blur fono */
-    position: relative; /* Pozicionuojame paveikslėlį virš blur fono */
+    z-index: 1;
+    position: relative;
+    transform: scale(0.5); /* Pradžioje sumažintas */
+    opacity: 0; /* Pradžioje nematomas */
+    animation: scaleIn 2s ease-out forwards; /* Pridėta animacija */
 }
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.8) translateY(10px); /* Šiek tiek mažesnis ir žemiau */
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0); /* Stabilioje vietoje */
+        opacity: 1;
+    }
+}
+
+
 
 
 
@@ -337,8 +377,17 @@ nav ul li a:hover {
     padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 100%; /* Užima visą plotį */
+    max-width: 400px; /* Maksimalus plotis - tiks, kad forma netaptų per plati */
     text-align: center;
+    margin-bottom: 600px;
+}
+
+/* Kiti formos stiliai */
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
 }
 
 /* Formos antraštė */
@@ -422,6 +471,7 @@ h1 {
 }
 
 .products li {
+    position: relative;
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -429,6 +479,23 @@ h1 {
     padding: 20px;
     width: 300px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.products li:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.products li img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
 
 .products li h2 {
@@ -444,4 +511,28 @@ h1 {
 .products li p:last-of-type {
     font-weight: bold;
     color: #555;
+}
+
+
+
+.cart-icon {
+    display: flex;
+    justify-content: center; /* Piktograma centruojama horizontalioje kryptyje */
+    margin-top: 20px; /* Tarpo viršus */
+    margin-bottom: 20px; /* Tarpo apačia */
+    z-index: 20; /* Piktogramos sluoksnio prioritetas */
+    
+}
+
+.cart-icon img {
+    width: 240px; /* Paveikslėlio plotis */
+    height: auto; /* Automatinis aukštis */
+    transition: transform 0.5s ease; /* Sklandus užvedimo efektas */
+}
+
+.cart-icon img:hover {
+    transform: scale(1.5); /* Paveikslėlis padidės užvedus pelę */
+
+
+       
 }

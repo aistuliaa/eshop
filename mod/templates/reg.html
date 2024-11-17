@@ -3,7 +3,9 @@
 {% block title %}Registracija{% endblock %}
 
 {% block content %}
+
 <h1>Registracija</h1>
+<div class="form-container">
 <form method="POST" action="{{ url_for('registracija.register') }}">
     <div class="form-row">
         <label for="username">Vartotojo vardas:</label>
@@ -18,4 +20,5 @@
     </div>
 </form>
 <p><a href="{{ url_for('login') }}">Jau turite paskyrą? Prisijunkite</a></p>
+
 {% endblock %}
