@@ -32,6 +32,12 @@ def get_all_products():
     products = session.query(Product).all()
     return render_template('prekes.html', products=products)
 
+# @app.route('/cargo')
+# def get_all_products():
+#     """Display all products."""
+#     products = session.query(Product).all()
+#     return render_template('prekes.html', products=products)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Handle login functionality."""
@@ -60,6 +66,11 @@ def logout():
     flash('Sėkmingai atsijungėte.', 'success')
     return redirect(url_for('home'))
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 729ee7a60997064bff0b802da15eafce4a46030b
 @app.route('/pirkejas')
 @login_required
 def pirkejas():
