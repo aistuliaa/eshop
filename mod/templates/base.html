@@ -19,10 +19,10 @@
     </header>
     <!-- Main Navigation -->
     <nav>
+                <p>Sveiki, {{ session.get('username') }}</p> <!-- Pasveikinimas viršuje -->
         <ul>
             <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
             {% if session.get('user_id') %}
-                <li>Sveiki, {{ session.get('username') }}</li>
                 <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
             {% else %}
                 <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
@@ -35,9 +35,11 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <h2 class="sidebar-title">Pirkėjo meniu</h2>
+        <p>Sveiki, {{ session.get('username') }}</p> <!-- Pasveikinimas viršuje -->
         <ul>
             {% if session.get('user_id') %}
-                <li>Sveiki, {{ session.get('username') }}</li>
+                
+                <li><a href="{{ url_for('pirkejas') }}">Mano paskyra</a></li>
                 <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
                 <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
                 <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>

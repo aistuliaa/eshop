@@ -104,16 +104,16 @@ def logout():
     flash('Sėkmingai atsijungėte.', 'success')
     return redirect(url_for('home'))
 
-@app.route('/pirkejas')
-@login_required
-def pirkejas():
-    """Render the customer page."""
-    if 'user_id' in flask_session:
-        user = session.query(User).get(flask_session['user_id'])
-        if user:
-            return render_template('pirkejas.html', user=user)
-    flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
-    return redirect(url_for('login'))
+# @app.route('/pirkejas')
+# @login_required
+# def pirkejas():
+#     """Render the customer page."""
+#     if 'user_id' in flask_session:
+#         user = session.query(User).get(flask_session['user_id'])
+#         if user:
+#             return render_template('pirkejas.html', user=user)
+#     flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
+#     return redirect(url_for('login'))
 
 @app.route('/balansas')
 @login_required
@@ -140,6 +140,18 @@ def admin_dashboard():
         flash('Neturite prieigos teisių.', 'error')
         return redirect(url_for('home'))
     return render_template('admin/dashboard.html')
+
+@app.route('/pirkejas')
+@login_required
+def pirkejas():
+    """Render the customer page."""
+    if 'user_id' in flask_session:
+        user = session.query(User).get(flask_session['user_id'])
+        if user:
+            return render_template('pirkejas.html', user=user)
+    flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
+    return redirect(url_for('login'))
+
 
 # Run the application
 if __name__ == '__main__':
