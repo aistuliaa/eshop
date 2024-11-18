@@ -551,3 +551,71 @@ h1 {
 
        
 }
+
+<!-- Stiliai -->
+<style>
+    /* Nuorodos į visas prekes stilius */
+    .all-products-link {
+        display: inline-block;
+        margin: 1rem 0;
+        padding: 0.5rem 1rem;
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 0.3rem;
+        font-size: 1.1rem;
+    }
+
+    .all-products-link:hover {
+        background-color: #218838;
+    }
+
+    /* Flexbox forma */
+    .filter-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: flex-end;
+    }
+
+    .filter-form div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-form label {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .filter-form select,
+    .filter-form input {
+        padding: 0.4rem;
+        font-size: 1rem;
+    }
+
+    .filter-form button {
+        padding: 0.5rem 1rem;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 0.3rem;
+        cursor: pointer;
+    }
+
+    .filter-form button:hover {
+        background-color: #0056b3;
+    }
+
+    .products ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .products li {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        border-bottom: 1px solid #ddd;
+    }
+</style>

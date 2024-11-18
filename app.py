@@ -24,18 +24,45 @@ def home():
     """Render the home page."""
     return render_template('index.html')
 
+from flask import request, render_template
+from sqlalchemy import and_
+
 @app.route('/cargo')
 def get_all_products():
-    # Gauname 'sort' parametrą iš URL, jei nėra, numatytoji reikšmė bus 'name'
-    sort_by = request.args.get('sort', 'name')  # Pavyzdžiui, 'price', 'rating', 'delivery_date', 'category'
+    # Gauti užklausos parametrus
+    sort_by = request.args.get('sort', 'name')  # Numatytoji rūšiavimo reikšmė
+    category = request.args.get('category', '')  # Filtras pagal kategoriją
+    min_price = request.args.get('min_price', type=float)
+    max_price = request.args.get('max_price', type=float)
+    search = request.args.get('search', '')  # Paieška pagal pavadinimą
+
+    # Užklausa į duomenų bazę
+    query = session.query(Product)
+
+    # Filtravimas pagal kategoriją
+    if category:
+        query = query.filter(Product.category == category)
+
+    # Filtravimas pagal kainos intervalą
+    if min_price is not None:
+        query = query.filter(Product.price >= min_price)
+    if max_price is not None:
+        query = query.filter(Product.price <= max_price)
+
+    # Filtravimas pagal pavadinimą (paieška)
+    if search:
+        query = query.filter(Product.name.ilike(f"%{search}%"))
+
+    # Rūšiavimas
+    if sort_by in ['name', 'price', 'rating', 'category']:
+        query = query.order_by(getattr(Product, sort_by))
     
-    # Dinamiškai rikiuojame pagal pasirinktą parametrą
-    if sort_by in ['price', 'rating', 'delivery_date', 'bestsellers', 'category']:
-        products = session.query(Product).order_by(getattr(Product, sort_by)).all()
-    else:
-        products = session.query(Product).all()  # Jei nėra tinkamo parametro, rodome nesortuotus
-    
+    # Gauti rezultatus
+    products = query.all()
+
     return render_template('prekes.html', products=products)
+
+
 # @app.route('/cargo')
 # def get_all_products():
 #     from mod.model.idp_classes import Product

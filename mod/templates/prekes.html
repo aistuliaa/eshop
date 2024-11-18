@@ -3,18 +3,53 @@
 {% block title %}Prekių sąrašas{% endblock %}
 
 {% block content %}
-    <h1>Visos prekės:</h1>
-    <p>Jas galima pirkti, pirkti, pirkti!</p>
+        <!-- Nuoroda į visas prekes -->
+    <div>
+       <h1> <a href="/cargo" class="all-products-link">Rodyti visas prekes</a></h1>
+    </div>
 
-    <div class="products"> <!-- Sorting Options -->
-        <p>Sort by:
-            <a href="?sort=price">Price</a> |
-            <a href="?sort=rating">Rating</a> |
-            <!-- <a href="?sort=delivery_date">Delivery Date</a> | -->
-            <!-- <a href="?sort=bestsellers">Bestsellers</a> | -->
-            <a href="?sort=category">Kategorija</a>
-        </p>
-    
+    <!-- Filtravimo ir rūšiavimo forma -->
+    <form method="get" action="/cargo" class="filter-form">
+        <div>
+            <label for="search">Paieška pagal pavadinimą:</label>
+            <input type="text" name="search" id="search" placeholder="Ieškoti..." value="{{ request.args.get('search') }}">
+        </div>
+
+        <div>
+            <label for="category">Kategorija:</label>
+            <select name="category" id="category">
+                <option value="" {% if request.args.get('category') == '' %}selected{% endif %}>Visos</option>
+                <option value="electronics" {% if request.args.get('category') == 'electronics' %}selected{% endif %}>Elektronika</option>
+                <option value="books" {% if request.args.get('category') == 'books' %}selected{% endif %}>Knygos</option>
+                <option value="clothing" {% if request.args.get('category') == 'clothing' %}selected{% endif %}>Drabužiai</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="min_price">Minimali kaina:</label>
+            <input type="number" name="min_price" id="min_price" step="0.01" placeholder="0.00" value="{{ request.args.get('min_price') }}">
+        </div>
+
+        <div>
+            <label for="max_price">Maksimali kaina:</label>
+            <input type="number" name="max_price" id="max_price" step="0.01" placeholder="0.00" value="{{ request.args.get('max_price') }}">
+        </div>
+
+        <div>
+            <label for="sort">Rūšiuoti pagal:</label>
+            <select name="sort" id="sort">
+                <option value="name" {% if request.args.get('sort') == 'name' %}selected{% endif %}>Pavadinimas</option>
+                <option value="price" {% if request.args.get('sort') == 'price' %}selected{% endif %}>Kaina</option>
+                <option value="rating" {% if request.args.get('sort') == 'rating' %}selected{% endif %}>Įvertinimas</option>
+                <option value="category" {% if request.args.get('sort') == 'category' %}selected{% endif %}>Kategorija</option>
+            </select>
+        </div>
+
+        <button type="submit">Filtruoti</button>
+    </form>
+
+    <!-- Produktų sąrašas -->
+    <div class="products">
         {% if products %}
             <ul>
                 {% for product in products %}
