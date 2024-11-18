@@ -5,17 +5,16 @@
 {% block content %}
 <h1>Registracija</h1>
 <form method="POST" action="{{ url_for('registracija.register') }}">
-    <div class="form-row">
-        <label for="username">Vartotojo vardas:</label>
-        <input type="text" name="username" id="username" required>
-    </div>
-    <div class="form-row">
-        <label for="password">Slaptažodis:</label>
-        <input type="password" name="password" id="password" required>
-    </div>
-    <div class="form-row">
-        <input type="submit" value="Registruotis">
-    </div>
+    <label for="username">Vartotojo vardas:</label>
+    <input type="text" name="username" id="username" required><br>
+
+    <label for="email">El. paštas:</label>
+    <input type="email" name="email" id="email" required><br>
+
+    <label for="password">Slaptažodis:</label>
+    <input type="password" name="password" id="password" required><br>
+
+    <input type="submit" value="Registruotis">
 </form>
-<p><a href="{{ url_for('login') }}">Jau turite paskyrą? Prisijunkite</a></p>
+<p><a href="{{ url_for('registracija.login_page') }}">Jau turite paskyrą? Prisijunkite</a></p>
 {% endblock %}

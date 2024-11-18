@@ -13,26 +13,32 @@ def register():
     if request.method == 'POST':
         try:
             username = request.form.get('username')
+            email = request.form.get('email')
             password = request.form.get('password')
 
-            existing_user = session.query(User).filter_by(username=username).first()
-            if existing_user:
-                flash("Vartotojo vardas jau užimtas", "error")
+            if not username or not email or not password:
+                flash("Visi laukai yra privalomi.", "error")
                 return redirect(url_for('registracija.register'))
 
-            hashed_password = generate_password_hash(password, method='sha256')
+            existing_user = session.query(User).filter(
+                (User.username == username) | (User.email == email)
+            ).first()
+            if existing_user:
+                flash("Vartotojo vardas arba el. pašto adresas jau užimtas.", "error")
+                return redirect(url_for('registracija.register'))
 
-            new_user = User(username=username, password=hashed_password)
+            hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
+            new_user = User(username=username, email=email, password=hashed_password)
             session.add(new_user)
             session.commit()
 
             flash("Registracija sėkminga! Galite prisijungti.", "success")
-            return redirect(url_for('login_page'))
+            return redirect(url_for('registracija.login_page'))
 
         except Exception as e:
             session.rollback()
-            flash(f"Įvyko klaida: {str(e)}", "error")
+            flash(f"Įvyko klaida registruojant: {str(e)}", "error")
             return redirect(url_for('registracija.register'))
 
     return render_template('reg.html')

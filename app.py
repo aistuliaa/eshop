@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect
 from flask_login import LoginManager, current_user, login_required
 from mod.model.user_controller import user_blueprint
 from mod.model.registracija import registracija_blueprint
@@ -8,7 +8,7 @@ from mod.model.idp_classes import Product
 app = Flask(__name__, template_folder='mod/templates')
 app.secret_key = 'dreamteam'
 
-app.register_blueprint(registracija_blueprint, url_prefix='/')
+app.register_blueprint(registracija_blueprint, url_prefix='/auth')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -30,8 +30,12 @@ def get_all_products():
     products = session.query(Product).all()
     return render_template('prekes.html', products=products)
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        return redirect(url_for('home'))
     return render_template('login.html')
 
 @app.route('/reg')

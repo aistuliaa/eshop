@@ -10,7 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from mod.model.idp_classes import User, engine
 
 app = Flask(__name__)
-app.secret_key = 'dreamteam' 
+app.secret_key = 'dreamteam'
 # nesu tikra ar mums butent sito reikia
 
 Session = sessionmaker(bind=engine)
@@ -23,16 +23,21 @@ def login():
         password = request.form.get('password')
 
         user = session.query(User).filter_by(username=username).first()
-        if user is None:
-            flash('Vartotojas su tokiu prisijungimo vardu nerastas')
+        if not user:
+            flash('Vartotojas su tokiu prisijungimo vardu nerastas', 'error')
             return redirect(url_for('login'))
+        
         if user.is_blocked:
-            flash('Prisijungimas užblokuotas dėl per daug nesėkmingų bandymų')
+            flash('Prisijungimas užblokuotas dėl per daug nesėkmingų bandymų', 'error')
             return redirect(url_for('login'))
+        
         if check_password_hash(user.password, password):
             user.failed_logins = 0
             session.commit()
-            flash('Prisijungimas sėkmingas')
+            
+            flask_session['user_id'] = user.id
+            flask_session['username'] = user.username
+            flash('Prisijungimas sėkmingas', 'success')
             return redirect(url_for('home'))
     # cia graziname i pagrindini puslapi, kurio vardas nezinau ar bus toks, todel cia ir pasizymiu
         else:
@@ -40,20 +45,25 @@ def login():
             if user.failed_logins >= 3:
                 user.is_blocked = True  # blokas po triju nesegeru
             session.commit()
-            flash(f"Neteisingas slaptažodis. Likę bandymai: {3 - user.failed_logins}")
+            remaining_attempts = 3 - user.failed_logins
+            flash(f"Neteisingas slaptažodis. Likę bandymai: {remaining_attempts}", 'error')
             return redirect(url_for('login'))
-    else:
-        return render_template('login.html')
+        
+    return render_template('login.html')
 
 @app.route('/logout')
 def logout():
     flask_session.pop('user_id', None)
-    flash('Sėkmingai atsijungėte.')
+    flask_session.pop('username', None)
+    flash('Sėkmingai atsijungėte.', 'success')
     return redirect(url_for('login'))
 
 @app.route('/home')
 def home():
-    return "Pagrindinis puslapis po prisijungimo."
+    if 'user_id' in flask_session:
+        username = flask_session['username']
+        return render_template('index.html', username=username)
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
