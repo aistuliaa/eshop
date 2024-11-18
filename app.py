@@ -77,8 +77,6 @@ def logout():
     flash('Sėkmingai atsijungėte.', 'success')
     return redirect(url_for('home'))
 
-
-
 @app.route('/pirkejas')
 @login_required
 def pirkejas():

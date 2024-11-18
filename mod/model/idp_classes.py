@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship, declarative_base, sessionmaker
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+import os
 
 Base = declarative_base()
 
@@ -72,11 +73,15 @@ class AuditLog(Base):
 
 User.audit_logs = relationship('AuditLog', back_populates='user')
 
-DATABASE_URL = "sqlite:///duombaze.db"
+db_directory = os.path.join(os.path.dirname(__file__), '..', 'db')
+os.makedirs(db_directory, exist_ok=True)
+db_path = os.path.join(db_directory, 'duombaze.db')
+DATABASE_URL = f"sqlite:///{db_path}"
 
-engine = create_engine(DATABASE_URL, echo=False)
+engine = create_engine(DATABASE_URL, echo=True)
 
-Base.metadata.create_all(bind=engine)
+if not os.path.exists(db_path):
+    Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
