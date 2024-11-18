@@ -6,15 +6,21 @@
     <h1>Visos prekės:</h1>
     <p>Jas galima pirkti, pirkti, pirkti!</p>
 
-    <div class="products">
+    <div class="products"> <!-- Sorting Options -->
+        <p>Sort by:
+            <a href="?sort=price">Price</a> |
+            <a href="?sort=rating">Rating</a> |
+            <!-- <a href="?sort=delivery_date">Delivery Date</a> | -->
+            <!-- <a href="?sort=bestsellers">Bestsellers</a> | -->
+            <a href="?sort=category">Kategorija</a>
+        </p>
+    
         {% if products %}
             <ul>
                 {% for product in products %}
                     <li>
-                        <h2>{{ product.name }}</h2>
-                        <p>{{ product.description }}</p>
-                        <p>Kaina: {{ product.price }} €</p>
-                        <p>Likęs kiekis: {{ product.stock }}</p>
+                        <strong>{{ product.name }}</strong> - ${{ product.price }}<br>
+                        <em>{{ product.description }}</em> | Stock: {{ product.stock }} | Category: {{ product.category }}
                     </li>
                 {% endfor %}
             </ul>

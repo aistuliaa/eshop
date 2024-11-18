@@ -9,9 +9,25 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    justify-content: center;
 }
 
+.main-wrapper {
+    max-width: 1900px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh; /* Užtikrina, kad aukštis užims visą ekraną */
+    display: flex;
+    flex-direction: column; /* Jei turite kitų elementų viduje, šis stilius leis jiems tvarkingai išsidėstyti */
+    justify-content: center; /* Centruoja turinį vertikaliai */
+    background: url('{{ url_for("static", filename="images/background.jpg") }}') no-repeat center center;
+    background-size: cover;
+}
+
+
 nav {
+    left: 50%;
+    transform: translateX(-50%);
     opacity: 0.8; /* 80% nepermatomumas */
     background-color: #333;
     background: linear-gradient(to bottom, #575A49, #ABA68D);
@@ -61,7 +77,7 @@ nav ul li a:hover {
 .sidebar {
     height: 100%;
     width: 250px;
-    position: fixed;
+    
     top: 0;
     left: 0;
     background-color: #333;
@@ -412,8 +428,7 @@ label {
 }
 
 /* Įvesties laukeliai */
-input[type="text"], 
-input[type="password"] {
+input {
     width: 100%;
     padding: 10px;
     font-size: 1em;
