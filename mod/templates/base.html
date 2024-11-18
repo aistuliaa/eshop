@@ -29,58 +29,53 @@
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="header">
-        <div class="header-content">
-            <img src="{{ url_for('static', filename='images/header.png') }}" alt="Puslapio galva">
+    <!-- Pagrindinis konteineris -->
+    <div class="main-wrapper">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <img src="{{ url_for('static', filename='images/header.png') }}" alt="Puslapio galva">
+            </div>
+        </header>
+
+        <!-- Navigation Menu -->
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
+                <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
+                <li><a href="{{ url_for('reg') }}">Registruotis</a></li>
+                <li><a href="{{ url_for('get_all_products') }}">Prekės</a></li>
+            </ul>
+        </nav>
+
+        <!-- Sidebar Menu -->
+        <div class="sidebar">
+            <div class="cart-icon">
+                <a href="{{ url_for('view_cart') }}">
+                    <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Prekių krepšelis">
+                </a>
+            </div>
+            <h2 class="sidebar-title">Pirkėjo meniu</h2>
+            <ul>
+                <li><a href="{{ url_for('loginout') }}">Atsijungti</a></li>
+                <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
+                <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
+            </ul>
+
+            <h2 class="sidebar-title">Admin meniu</h2>
+            <ul>
+                <li><a href="{{ url_for('new_cargo') }}">Pridėti naują prekę</a></li>
+                <li><a href="{{ url_for('add_cargo') }}">Papildyti prekių kiekį</a></li>
+                <li><a href="{{ url_for('delete_cargo') }}">Pašalinti prekę</a></li>
+                <li><a href="{{ url_for('delete_user') }}">Ištrinti vartotoją</a></li>
+                <li><a href="{{ url_for('stat_cargo') }}">Prekių statistika</a></li>
+            </ul>
         </div>
-    </header>
 
-    <!-- Navigation Menu -->
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
-            <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
-            <li><a href="{{ url_for('reg') }}">Registruotis</a></li>
-            <li><a href="{{ url_for('get_all_products') }}">Prekės</a></li>
-        </ul>
-    </nav>
-
-    <!-- Sidebar Menu -->
-
-    
- 
-
-    <div class="sidebar">
-        <div class="cart-icon">
-            <a href="{{ url_for('view_cart') }}">
-                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Prekių krepšelis">
-            </a>
+        <!-- Main Content -->
+        <div class="main-content">
+            {% block content %}{% endblock %}
         </div>
-        <h2 class="sidebar-title">Pirkėjo meniu</h2>
-        <ul>
-            <li><a href="{{ url_for('loginout') }}">Atsijungti</a></li>
-            <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
-            <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
-        </ul>
-
-        <h2 class="sidebar-title">Admin meniu</h2>
-        <ul>
-            <li><a href="{{ url_for('new_cargo') }}">Pridėti naują prekę</a></li>
-            <li><a href="{{ url_for('add_cargo') }}">Papildyti prekių kiekį</a></li>
-            <li><a href="{{ url_for('delete_cargo') }}">Pašalinti prekę</a></li>
-            <li><a href="{{ url_for('delete_user') }}">Ištrinti vartotoją</a></li>
-            <li><a href="{{ url_for('stat_cargo') }}">Prekių statistika</a></li>
-        </ul>
-
-
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-
-
-        {% block content %}{% endblock %}
     </div>
 </body>
 </html>
