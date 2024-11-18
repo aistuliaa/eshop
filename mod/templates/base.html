@@ -4,111 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<<<<<<< HEAD
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pirkime!</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Annie+Use+Your+Telescope&family=Griffy&family=Yatra+One&display=swap');
-
-        body {
-            font-family: 'Yatra One', sans-serif; /* Pagrindinis šriftas */
-        }
-
-        h1 {
-            font-family: 'Amatic SC', cursive; /* Naudoja "Amatic SC" */
-            font-size: 3rem;
-        }
-
-        h2 {
-            font-family: 'Griffy', cursive; /* Naudoja "Griffy" */
-            font-size: 2.5rem;
-        }
-
-
-    </style>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
-</head>
-<body>
-    <!-- Pagrindinis konteineris -->
-    <div class="main-wrapper">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="header-content">
-                <img src="{{ url_for('static', filename='images/header.png') }}" alt="Puslapio galva">
-            </div>
-        </header>
-
-        <!-- Navigation Menu -->
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
-                <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
-                <li><a href="{{ url_for('reg') }}">Registruotis</a></li>
-                <li><a href="{{ url_for('get_all_products') }}">Prekės</a></li>
-            </ul>
-        </nav>
-
-        <!-- Sidebar Menu -->
-        <div class="sidebar">
-            <div class="cart-icon">
-                <a href="{{ url_for('view_cart') }}">
-                    <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Prekių krepšelis">
-                </a>
-            </div>
-            <h2 class="sidebar-title">Pirkėjo meniu</h2>
-            <ul>
-                <li><a href="{{ url_for('loginout') }}">Atsijungti</a></li>
-                <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
-                <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
-            </ul>
-
-            <h2 class="sidebar-title">Admin meniu</h2>
-            <ul>
-                <li><a href="{{ url_for('new_cargo') }}">Pridėti naują prekę</a></li>
-                <li><a href="{{ url_for('add_cargo') }}">Papildyti prekių kiekį</a></li>
-                <li><a href="{{ url_for('delete_cargo') }}">Pašalinti prekę</a></li>
-                <li><a href="{{ url_for('delete_user') }}">Ištrinti vartotoją</a></li>
-                <li><a href="{{ url_for('stat_cargo') }}">Prekių statistika</a></li>
-            </ul>
-        </div>
-
-<<<<<<< HEAD
-        <!-- Main Content -->
-        <div class="main-content">
-            {% block content %}{% endblock %}
-        </div>
-=======
-    <!-- Navigation Menu -->
-=======
     <title>{% block title %}Mano Svetainė{% endblock %}</title>
 </head>
 <body>
     <!-- Main Navigation -->
->>>>>>> Funkciju_su_puslapiu_apjungimas
     <nav>
         <ul>
             <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
             {% if session.get('user_id') %}
-            <li>Sveiki, {{ session.get('username') }}</li>
-            <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
-        {% else %}
-            <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
-            <li><a href="{{ url_for('registracija.register') }}">Registruotis</a></li>
-        {% endif %}
+                <li>Sveiki, {{ session.get('username') }}</li>
+                <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
+                <li><a href="{{ url_for('registracija.register') }}">Registruotis</a></li>
+            {% endif %}
             <li><a href="{{ url_for('get_all_products') }}">Prekės</a></li>
         </ul>
     </nav>
 
-<<<<<<< HEAD
-    <!-- Sidebar Menu -->
-
-    
- 
-
-=======
     <!-- Sidebar -->
->>>>>>> Funkciju_su_puslapiu_apjungimas
     <div class="sidebar">
         <div class="cart-icon">
             <a href="{{ url_for('view_cart') }}">
@@ -136,10 +51,8 @@
             <li><a href="{{ url_for('delete_user') }}">Ištrinti vartotoją</a></li>
             <li><a href="{{ url_for('stat_cargo') }}">Prekių statistika</a></li>
         </ul>
-
-
     </div>
-    
+
     <!-- Flash Messages -->
     <div class="flash-messages">
         {% with messages = get_flashed_messages(with_categories=True) %}
@@ -153,10 +66,7 @@
 
     <!-- Main Content -->
     <div class="main-content">
-
-
         {% block content %}{% endblock %}
->>>>>>> bc1d9d4910fb81a2202dbac62168056fbf3c1106
     </div>
 </body>
 </html>
