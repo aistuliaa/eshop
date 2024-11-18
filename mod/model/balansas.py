@@ -1,8 +1,9 @@
 # balanso perziurejimas ir papildymas
 
-from flask import Flask, request, redirect, url_for, flash, session as flask_session
-from sqlalchemy.orm import sessionmaker
+from flask import Flask, request, redirect, url_for, flash, session as flask_session, render_template
 from mod.model.idp_classes import User, engine
+from sqlalchemy.orm import sessionmaker
+
 
 app = Flask(__name__)
 app.secret_key = 'dreamteam'  # kaip suprantu reikia sito, kad flash funkcija veiktu
@@ -31,13 +32,8 @@ def balance_view():
             except ValueError:
                 flash('Netinkamai įvedėte sumą, patikrinkite ar gerai įvėdėte skaičius')
 
-        return f'''
-            <h2>Jūsų balansas: {user.balance:.2f} EUR</h2>
-            <form method="POST">
-                Papildyti balansą: <input type="text" name="amount"><br>
-                <input type="submit" value="Papildyti">
-            </form>
-        '''
+        return render_template('balansas.html', balance=user.balance)
+
     else:
         flash('Prašome prisijungti, kad galėtumėte peržiūrėti ir papildyti savo balansą.')
         return redirect(url_for('login_page'))  
