@@ -1,26 +1,27 @@
-from flask import Flask, request, render_template, url_for, redirect
-from flask_login import LoginManager, current_user, login_required
+from flask import Flask, request, render_template, url_for, redirect, flash, session as flask_session
+from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from mod.model.user_controller import user_blueprint
 from mod.model.registracija import registracija_blueprint
 from mod.db import session
-from mod.model.idp_classes import Product
+from mod.model.idp_classes import User, Product
 
 app = Flask(__name__, template_folder='mod/templates')
 app.secret_key = 'dreamteam'
 
+app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(registracija_blueprint, url_prefix='/auth')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    from mod.model.idp_classes import User
-    return User.get(user_id)
+    return session.query(User).get(user_id)
 
-# Routes
 @app.route('/')
 def home():
+    """Render the home page."""
     return render_template('index.html')
 
 
@@ -33,67 +34,74 @@ def get_all_products():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """Handle login functionality."""
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        return redirect(url_for('home'))
+
+        user = session.query(User).filter_by(username=username).first()
+        if user and user.check_password(password):
+            login_user(user)
+            flask_session['user_id'] = user.id
+            flask_session['username'] = user.username
+            flash('Prisijungta sėkmingai!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Neteisingas vartotojo vardas arba slaptažodis.', 'error')
+
     return render_template('login.html')
 
-@app.route('/reg')
-def reg():
-    return render_template('reg.html')
+@app.route('/logout')
+@login_required
+def logout():
+    """Handle logout functionality."""
+    logout_user()
+    flask_session.clear()
+    flash('Sėkmingai atsijungėte.', 'success')
+    return redirect(url_for('home'))
+
+@app.route('/cargo')
+def get_all_products():
+    """Display all products."""
+    products = session.query(Product).all()
+    return render_template('prekes.html', products=products)
 
 @app.route('/pirkejas')
+@login_required
 def pirkejas():
-    return render_template('pirkejas.html')
-
-@app.route('/loginout')
-def loginout():
-    return render_template('loginout.html')
+    """Render the customer page."""
+    if 'user_id' in flask_session:
+        user = session.query(User).get(flask_session['user_id'])
+        if user:
+            return render_template('pirkejas.html', user=user)
+    flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
+    return redirect(url_for('login'))
 
 @app.route('/balansas')
+@login_required
 def balansas():
-    return render_template('balansas.html')
+    """Display user balance."""
+    if 'user_id' in flask_session:
+        user = session.query(User).get(flask_session['user_id'])
+        if user:
+            return render_template('balansas.html', balance=user.balance)
+    flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
+    return redirect(url_for('login'))
 
 @app.route('/add_balansas')
+@login_required
 def add_balansas():
+    """Render page for adding balance."""
     return render_template('add_balansas.html')
 
 @app.route('/admin')
 @login_required
 def admin_dashboard():
+    """Render the admin dashboard."""
     if current_user.role != 'admin':
-        return redirect(url_for('profile'))
+        flash('Neturite prieigos teisių.', 'error')
+        return redirect(url_for('home'))
     return render_template('admin/dashboard.html')
-
-# admin meniu
-
-
-@app.route('/view_cart')
-def view_cart():
-    return render_template('view_cart.html')
-
-@app.route('/new_cargo')
-def new_cargo():
-    return render_template('new_cargo.html')
-
-@app.route('/add_cargo')
-def add_cargo():
-    return render_template('add_cargo.html')
-
-@app.route('/delete_cargo')
-def delete_cargo():
-    return render_template('delete_cargo.html')
-
-@app.route('/delete_user')
-def delete_user():
-    return render_template('delete_user.html')
-
-@app.route('/stat_cargo')
-def stat_cargo():
-    return render_template('stat_cargo.html')
-
-
 
 # Run the application
 if __name__ == '__main__':

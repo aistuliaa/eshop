@@ -43,7 +43,6 @@ def login():
                 flask_session['user_id'] = user.id
                 flask_session['username'] = user.username
                 flash('Prisijungimas sėkmingas', 'success')
-                return redirect(url_for('home'))
             else:
                 # Failed login
                 user.failed_logins += 1

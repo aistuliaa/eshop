@@ -2,12 +2,12 @@ from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, Foreig
 from sqlalchemy.orm import relationship, declarative_base, sessionmaker
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 Base = declarative_base()
 
-class User(Base):
+class User(Base, UserMixin):
     __tablename__ = 'users'
-
     id = Column(Integer, primary_key=True)
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(100), unique=True, nullable=False)
@@ -18,8 +18,23 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     role = Column(String(20), default='customer')
 
-    def verify_password(self, password):
+    def check_password(self, password):
         return check_password_hash(self.password, password)
+    
+    def get_id(self):
+        return str(self.id)
+    
+    @property
+    def is_active(self):
+        return not self.is_blocked
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
 
     def block_user(self):
         self.is_blocked = True
