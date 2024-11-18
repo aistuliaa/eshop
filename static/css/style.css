@@ -428,8 +428,7 @@ label {
 }
 
 /* Įvesties laukeliai */
-input[type="text"], 
-input[type="password"] {
+input {
     width: 100%;
     padding: 10px;
     font-size: 1em;
