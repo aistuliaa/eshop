@@ -60,12 +60,6 @@ def logout():
     flash('Sėkmingai atsijungėte.', 'success')
     return redirect(url_for('home'))
 
-@app.route('/cargo')
-def get_all_products():
-    """Display all products."""
-    products = session.query(Product).all()
-    return render_template('prekes.html', products=products)
-
 @app.route('/pirkejas')
 @login_required
 def pirkejas():
