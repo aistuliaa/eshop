@@ -23,6 +23,7 @@ def load_user(user_id):
 def home():
     return render_template('index.html')
 
+
 @app.route('/cargo')
 def get_all_products():
     from mod.model.idp_classes import Product
