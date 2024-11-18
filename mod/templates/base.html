@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pirkime!</title>
@@ -37,20 +38,35 @@
     </header>
 
     <!-- Navigation Menu -->
+=======
+    <title>{% block title %}Mano Svetainė{% endblock %}</title>
+</head>
+<body>
+    <!-- Main Navigation -->
+>>>>>>> Funkciju_su_puslapiu_apjungimas
     <nav>
         <ul>
             <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
+            {% if session.get('user_id') %}
+            <li>Sveiki, {{ session.get('username') }}</li>
+            <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
+        {% else %}
             <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
-            <li><a href="{{ url_for('reg') }}">Registruotis</a></li>
+            <li><a href="{{ url_for('registracija.register') }}">Registruotis</a></li>
+        {% endif %}
             <li><a href="{{ url_for('get_all_products') }}">Prekės</a></li>
         </ul>
     </nav>
 
+<<<<<<< HEAD
     <!-- Sidebar Menu -->
 
     
  
 
+=======
+    <!-- Sidebar -->
+>>>>>>> Funkciju_su_puslapiu_apjungimas
     <div class="sidebar">
         <div class="cart-icon">
             <a href="{{ url_for('view_cart') }}">
@@ -59,9 +75,15 @@
         </div>
         <h2 class="sidebar-title">Pirkėjo meniu</h2>
         <ul>
-            <li><a href="{{ url_for('loginout') }}">Atsijungti</a></li>
-            <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
-            <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
+            {% if session.get('user_id') %}
+                <li>Prisijungėte kaip: {{ session.get('username') }}</li>
+                <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
+                <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
+                <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
+                <li><a href="{{ url_for('registracija.register') }}">Registruotis</a></li>
+            {% endif %}
         </ul>
 
         <h2 class="sidebar-title">Admin meniu</h2>
@@ -74,6 +96,17 @@
         </ul>
 
 
+    </div>
+    
+    <!-- Flash Messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </div>
 
     <!-- Main Content -->
