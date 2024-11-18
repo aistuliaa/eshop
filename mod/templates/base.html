@@ -35,8 +35,10 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <h2 class="sidebar-title">Pirkėjo meniu</h2>
-        <p>Sveiki, {% if session.get('username') %}{{ session.get('username') }}{% else %}Svečias{% endif %}</p> <!-- Pasveikinimas viršuje -->
-        <ul>
+        <div class="welcome-message">
+            <p>Sveiki, {% if session.get('username') %}{{ session.get('username') }}{% else %}Svečias{% endif %}</p>
+        </div>
+                <ul>
             {% if session.get('user_id') %}
                 
                 <li><a href="{{ url_for('pirkejas') }}">Mano paskyra</a></li>
