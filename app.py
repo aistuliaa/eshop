@@ -24,13 +24,24 @@ def home():
     """Render the home page."""
     return render_template('index.html')
 
-
 @app.route('/cargo')
 def get_all_products():
-    from mod.model.idp_classes import Product
-    from mod.db import session
-    products = session.query(Product).all()
+    # Gauname 'sort' parametrą iš URL, jei nėra, numatytoji reikšmė bus 'name'
+    sort_by = request.args.get('sort', 'name')  # Pavyzdžiui, 'price', 'rating', 'delivery_date', 'category'
+    
+    # Dinamiškai rikiuojame pagal pasirinktą parametrą
+    if sort_by in ['price', 'rating', 'delivery_date', 'bestsellers', 'category']:
+        products = session.query(Product).order_by(getattr(Product, sort_by)).all()
+    else:
+        products = session.query(Product).all()  # Jei nėra tinkamo parametro, rodome nesortuotus
+    
     return render_template('prekes.html', products=products)
+# @app.route('/cargo')
+# def get_all_products():
+#     from mod.model.idp_classes import Product
+#     from mod.db import session
+#     products = session.query(Product).all()
+#     return render_template('prekes.html', products=products)
 
 # @app.route('/cargo')
 # def get_all_products():
