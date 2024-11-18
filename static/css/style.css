@@ -621,6 +621,7 @@ h1 {
 
     .customer-dashboard {
         margin: 20px auto;
+        margin-top: -350px;
         max-width: 1200px;
         padding: 20px;
         background-color: #f9f9f9;

@@ -19,7 +19,7 @@
     </header>
     <!-- Main Navigation -->
     <nav>
-                <p>Sveiki, {{ session.get('username') }}</p> <!-- Pasveikinimas viršuje -->
+                <!-- <p>Sveiki, {% if session.get('username') %}{{ session.get('username') }}{% else %}Svečias{% endif %}</p> Pasveikinimas viršuje -->
         <ul>
             <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
             {% if session.get('user_id') %}
@@ -35,7 +35,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <h2 class="sidebar-title">Pirkėjo meniu</h2>
-        <p>Sveiki, {{ session.get('username') }}</p> <!-- Pasveikinimas viršuje -->
+        <p>Sveiki, {% if session.get('username') %}{{ session.get('username') }}{% else %}Svečias{% endif %}</p> <!-- Pasveikinimas viršuje -->
         <ul>
             {% if session.get('user_id') %}
                 
