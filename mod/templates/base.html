@@ -25,32 +25,29 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="cart-icon">
-            <a href="{{ url_for('view_cart') }}">
-                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Prekių krepšelis">
-            </a>
-        </div>
         <h2 class="sidebar-title">Pirkėjo meniu</h2>
         <ul>
             {% if session.get('user_id') %}
-                <li>Prisijungėte kaip: {{ session.get('username') }}</li>
+                <li>Sveiki, {{ session.get('username') }}</li>
+                <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
                 <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
                 <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
-                <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
             {% else %}
                 <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
                 <li><a href="{{ url_for('registracija.register') }}">Registruotis</a></li>
             {% endif %}
         </ul>
-
-        <h2 class="sidebar-title">Admin meniu</h2>
-        <ul>
-            <li><a href="{{ url_for('new_cargo') }}">Pridėti naują prekę</a></li>
-            <li><a href="{{ url_for('add_cargo') }}">Papildyti prekių kiekį</a></li>
-            <li><a href="{{ url_for('delete_cargo') }}">Pašalinti prekę</a></li>
-            <li><a href="{{ url_for('delete_user') }}">Ištrinti vartotoją</a></li>
-            <li><a href="{{ url_for('stat_cargo') }}">Prekių statistika</a></li>
-        </ul>
+    
+        {% if session.get('role') == 'admin' %}
+            <h2 class="sidebar-title">Admin meniu</h2>
+            <ul>
+                <li><a href="{{ url_for('add_product') }}">Pridėti naują prekę</a></li>
+                <li><a href="{{ url_for('update_stock') }}">Papildyti prekių kiekį</a></li>
+                <li><a href="{{ url_for('remove_product') }}">Pašalinti prekę</a></li>
+                <li><a href="{{ url_for('delete_user') }}">Ištrinti vartotoją</a></li>
+                <li><a href="{{ url_for('product_stats') }}">Prekių statistika</a></li>
+            </ul>
+        {% endif %}
     </div>
 
     <!-- Flash Messages -->
