@@ -114,6 +114,13 @@ def admin_dashboard():
         return redirect(url_for('home'))
     return render_template('admin/dashboard.html')
 
+cart = []
+@app.route('/cart')
+@login_required
+def view_cart():
+    total_price = sum(item['price'] * item['quantity'] for item in cart)
+    return render_template('view_cart.html', cart_items=cart, total_price=total_price)
+
 # Run the application
 if __name__ == '__main__':
     app.run(debug=True)
