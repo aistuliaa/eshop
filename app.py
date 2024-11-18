@@ -66,6 +66,11 @@ def logout():
     flash('Sėkmingai atsijungėte.', 'success')
     return redirect(url_for('home'))
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> debbaa286ab2d6521aedcbad7d9fd0565b587e83
 @app.route('/pirkejas')
 @login_required
 def pirkejas():
