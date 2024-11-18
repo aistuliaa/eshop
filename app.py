@@ -24,6 +24,14 @@ def home():
     """Render the home page."""
     return render_template('index.html')
 
+
+@app.route('/cargo')
+def get_all_products():
+    from mod.model.idp_classes import Product
+    from mod.db import session
+    products = session.query(Product).all()
+    return render_template('prekes.html', products=products)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Handle login functionality."""
