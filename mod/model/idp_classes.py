@@ -60,6 +60,19 @@ class Product(Base):
 
     def __repr__(self):
         return f"<Product(name={self.name}, price={self.price})>"
+    
+class Cart(Base):
+    __tablename__ = 'cart'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    product_id = Column(Integer, ForeignKey('products.id'))
+    quantity = Column(Integer, default=1)
+
+    user = relationship('User', back_populates='cart_items')
+    product = relationship('Product')
+
+User.cart_items = relationship('Cart', back_populates='user')
 
 class AuditLog(Base):
     __tablename__ = 'audit_logs'

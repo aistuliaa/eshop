@@ -2,8 +2,10 @@ from flask import Flask, request, render_template, url_for, redirect, flash, ses
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from mod.model.user_controller import user_blueprint
 from mod.model.registracija import registracija_blueprint
-from mod.db import session
+from mod.model.cart_crud import get_cart_items, delete_from_cart, add_to_cart
 from mod.model.idp_classes import User, Product
+from mod.db import session
+from mod.model.product_crud import engine
 
 app = Flask(__name__, template_folder='mod/templates')
 app.secret_key = 'dreamteam'
@@ -114,12 +116,37 @@ def admin_dashboard():
         return redirect(url_for('home'))
     return render_template('admin/dashboard.html')
 
-cart = []
-@app.route('/cart')
+@app.route('/view_cart')
 @login_required
 def view_cart():
-    total_price = sum(item['price'] * item['quantity'] for item in cart)
-    return render_template('view_cart.html', cart_items=cart, total_price=total_price)
+    user_id = current_user.id
+    cart_items = get_cart_items(user_id)
+    total_price = sum(cart_item.quantity * product.price for cart_item, product in cart_items)
+    return render_template('view_cart.html', cart_items=cart_items, total_price=total_price)
+
+@app.route('/add_to_cart/<int:product_id>', methods=['POST'])
+@login_required
+def add_to_cart_route(product_id):
+    user_id = current_user.id
+    quantity = int(request.form['quantity'])
+    add_to_cart(user_id, product_id, quantity)
+    flash("Product added to cart!")
+    return redirect(url_for('view_cart'))
+
+@app.route('/delete_from_cart/<int:product_id>', methods=['POST'])
+@login_required
+def delete_from_cart_route(product_id):
+    user_id = current_user.id
+    delete_from_cart(user_id, product_id)
+    flash("Product removed from cart!")
+    return redirect(url_for('view_cart'))
+
+@app.route('/checkout', methods=['POST'])
+@login_required
+def checkout():
+    user_id = current_user.id
+    flash("Checkout successful!")
+    return redirect(url_for('view_cart'))
 
 # Run the application
 if __name__ == '__main__':
