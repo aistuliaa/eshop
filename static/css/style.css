@@ -74,24 +74,26 @@ nav ul li a:hover {
 
 
 /* Sidebar */
-
 .sidebar {
     height: 100%;
     width: 250px;
-    
+    position: fixed; /* Make the sidebar fixed on the page */
     top: 0;
     left: 0;
     background-color: #333;
     color: white;
     padding-top: 20px;
-    z-index: 10; /* Užtikrina, kad sidebar bus po meniu */
+    z-index: 10; /* Ensures sidebar is on top of the content */
+    overflow-y: auto; /* Adds scroll functionality when content exceeds the sidebar height */
+    max-height: 100vh; /* Limits sidebar height to the viewport height */
 }
 
 .sidebar ul li a:hover {
-    background-color: #ffffff; /* Ta pati spalva kaip navigacijoje užvedus */
-    color: rgb(255, 255, 255); /* Teksto spalva užvedus */
-    font-weight: bold; /* Paryškintas tekstas užvedus */
+    background-color: #ffffff; /* Hover background color */
+    color: rgb(255, 255, 255); /* Text color on hover */
+    font-weight: bold; /* Bold text on hover */
 }
+
 
 /* Meniu fiksavimas */
 nav {
@@ -405,7 +407,7 @@ nav ul li a:hover {
     width: 100%; /* Užima visą plotį */
     max-width: 400px; /* Maksimalus plotis - tiks, kad forma netaptų per plati */
     text-align: center;
-    margin-bottom: 600px;
+    margin-top: 20px;
 }
 
 /* Kiti formos stiliai */
@@ -511,7 +513,7 @@ h1 {
        
 }
 
-<!-- Stiliai -->
+/* <!-- Stiliai --> */
 <style>
     /* Nuorodos į visas prekes stilius */
     .all-products-link {
@@ -762,13 +764,13 @@ h1 {
                 color: #555;
             }
     
-<<<<<<< HEAD
+/* <<<<<<< HEAD */
     
             .visiproduktai {
                 font-weight: bold;
                 color: #000000;
             }
-=======
+/* ======= */
             <style>
             body {
                 background: url('background-pattern.png') no-repeat center center fixed;
@@ -826,27 +828,42 @@ h1 {
             }
 
   /* General Container Styling */
-.container {
-    max-width: 600px;
+  .container {
+    display: flex;
+    flex-wrap: wrap; /* Leidžia elementams peržengti eilutės ribas, jei jų yra daugiau nei galima rodyti */
+    justify-content: space-between; /* Paskirsto erdvę tarp elementų */
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: -500px;
+    margin-top: 50px;
+}
+
+.container table {
+    width: 100%; /* Užtikrina, kad stalas užimtų visą vietą konteineryje */
+    border-collapse: collapse;
+}
+
+.container th, .container td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.container th {
+    background-color: #f4f4f4;
 }
 
 
-  
-        </style>
 
 
 
-
-    
+/*     
    
 <<<<<<< HEAD
 >>>>>>> b93360cc7d065effbad7e499d8ec53aee1df6fd2
 =======
 >>>>>>> Funkciju_su_puslapiu_apjungimas
->>>>>>> 9ff5647f1e40ba1508871eafdbd5f8f3f44d6d42
+>>>>>>> 9ff5647f1e40ba1508871eafdbd5f8f3f44d6d42 */
