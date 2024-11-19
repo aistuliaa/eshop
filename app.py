@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, url_for, redirect, flash, session as flask_session
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
-from mod.model.user_controller import user_blueprint
+from mod.model.user_controller import user_blueprint, admin_blueprint
+from mod.model.admin_controller import admin_blueprint
 from mod.model.registracija import registracija_blueprint
 from mod.db import session
 from mod.model.idp_classes import User, Product
@@ -10,6 +11,7 @@ app.secret_key = 'dreamteam'
 
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(registracija_blueprint, url_prefix='/auth')
+app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -88,7 +90,10 @@ def login():
             login_user(user)
             flask_session['user_id'] = user.id
             flask_session['username'] = user.username
+            flask_session['is_admin'] = user.is_admin
             flash('Prisijungta sėkmingai!', 'success')
+            if user.is_admin:
+                return redirect(url_for('admin_dashboard'))
             return redirect(url_for('home'))
         else:
             flash('Neteisingas vartotojo vardas arba slaptažodis.', 'error')
@@ -136,10 +141,10 @@ def add_balansas():
 @login_required
 def admin_dashboard():
     """Render the admin dashboard."""
-    if current_user.role != 'admin':
+    if not flask_session.get('is_admin'):
         flash('Neturite prieigos teisių.', 'error')
         return redirect(url_for('home'))
-    return render_template('admin/dashboard.html')
+    return render_template('admin.html')
 
 @app.route('/pirkejas')
 @login_required
