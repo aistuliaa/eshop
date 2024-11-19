@@ -102,6 +102,16 @@ class OrderItem(Base):
     order = relationship("Order", back_populates="items")
     product = relationship("Product", back_populates="order_items")
 
+# class Cart(Base):
+#     __tablename__ = 'carts'
+
+#     id = Column(Integer, primary_key=True)
+#     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+#     created_at = Column(DateTime, default=datetime.utcnow)
+#     items = relationship("CartItem", back_populates="cart")
+
+#     user = relationship("User", back_populates="cart")
+
 
 class Review(Base):
     __tablename__ = 'reviews'

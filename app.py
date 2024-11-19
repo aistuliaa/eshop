@@ -27,7 +27,7 @@ def home():
     """Render the home page."""
     return render_template('index.html')
 
-app.add_url_rule('/statistika', view_func=statistika)
+# app.add_url_rule('/statistika', view_func=statistika)
 
 from flask import request, render_template
 from sqlalchemy import and_
