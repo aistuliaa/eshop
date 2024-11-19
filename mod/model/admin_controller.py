@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
-from mod.model.idp_classes import User, engine, session as db_session, Product, Order
+from mod.model.idp_classes import User, Product, Order, engine, session as db_session
 from sqlalchemy.orm import sessionmaker
 
 # Define Blueprint
@@ -135,7 +135,7 @@ def product_stats():
 @login_required
 def view_users():
     if not current_user.is_admin:
-        flash("Access denied. Admins only.", "error")
+        flash("Prieiga atmesta! Tik administratoriai gali pasiekti šią funkciją.", "error")
         return redirect(url_for("home"))
 
     users = db_session.query(User).all()
@@ -146,16 +146,24 @@ def view_users():
 @login_required
 def manage_products():
     if not current_user.is_admin:
-        flash("Access denied. Admins only.", "error")
+        flash("Prieiga atmesta! Tik administratoriai gali pasiekti šią funkciją.", "error")
         return redirect(url_for("home"))
-    return render_template("admin_manage_products.html")
+    
+    products = db_session.query(Product).all()
+    return render_template("admin_manage_products.html", products=products)
 
 @admin_blueprint.route("/view-orders", methods=["GET"])
 @login_required
 def view_orders():
     if not current_user.is_admin:
-        flash("Access denied. Admins only.", "error")
+        flash("Prieiga atmesta! Tik administratoriai gali pasiekti šią funkciją.", "error")
         return redirect(url_for("home"))
-
+    
     orders = db_session.query(Order).all()
     return render_template("admin_view_orders.html", orders=orders)
+
+@admin_blueprint.route("/logout")
+@login_required
+def logout():
+    flash("Sėkmingai atsijungėte.", "success")
+    return redirect(url_for("home"))
