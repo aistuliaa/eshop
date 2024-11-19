@@ -7,6 +7,10 @@
 
 <div class="customer-dashboard">
     <h1>Sveiki, {{ session.get('username') }}!</h1>
+    <img src="{{ user.profile_picture_url if user.profile_picture_url else '/static/images/default_profile.png' }}" alt="Profilio Paveikslėlis" class="profile-image">
+<!-- Default Profile Image (SVG format) -->
+
+
     <p>Čia galite matyti ir tvarkyti savo paskyros informaciją.</p>
 
     <div class="customer-actions">

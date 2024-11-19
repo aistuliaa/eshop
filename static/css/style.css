@@ -856,6 +856,13 @@ h1 {
     background-color: #f4f4f4;
 }
 
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;  /* Apvalus paveikslėlis */
+    object-fit: cover;  /* Užtikrina, kad paveikslėlis bus tinkamai pritaikytas */
+    border: 2px solid #ddd;  /* Šviesus rėmelis aplink paveikslėlį */
+}
 
 
 
