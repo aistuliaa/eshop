@@ -476,57 +476,7 @@ h1 {
     color: #333;
 }
 
-.products ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
 
-.products li {
-    position: relative;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: all 0.3s ease;
-    animation: fadeInUp 0.5s ease-out;
-}
-
-.products li:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.products li img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.products li h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #022316;
-}
-
-.products li p {
-    margin: 10px 0;
-}
-
-.products li p:last-of-type {
-    font-weight: bold;
-    color: #555;
-}
 
 
 
@@ -751,7 +701,60 @@ h1 {
             }
 
             }
+            .products ul {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .products li {
+                position: relative;
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                width: 300px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                transition: all 0.3s ease;
+                animation: fadeInUp 0.5s ease-out;
+            }
+            
+            .products li:hover {
+                transform: translateY(-15px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+            
+            .products li img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                margin-bottom: 15px;
+            }
+            
+            .products li h2 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+                color: #022316;
+            }
+            
+            .products li p {
+                margin: 10px 0;
+            }
+            
+            .products li p:last-of-type {
+                font-weight: bold;
+                color: #555;
+            }
     
     
-    
-   
+            .visiproduktai {
+                font-weight: bold;
+                color: #000000;
+            }
