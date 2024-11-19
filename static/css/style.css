@@ -753,8 +753,68 @@ h1 {
                 color: #555;
             }
     
+<<<<<<< HEAD
     
             .visiproduktai {
                 font-weight: bold;
                 color: #000000;
             }
+=======
+            <style>
+            body {
+                background: url('background-pattern.png') no-repeat center center fixed;
+                background-size: cover;
+                font-family: Arial, sans-serif;
+                color: #fff;
+                text-align: center;
+            }
+        
+            .admin-dashboard {
+                background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+                border-radius: 10px;
+                padding: 20px;
+                margin: 100px auto;
+                display: inline-block;
+                max-width: 400px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+        
+            h1 {
+                font-size: 28px;
+                color: #ffffff;
+                margin-bottom: 15px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            }
+        
+            p {
+                font-size: 16px;
+                margin-bottom: 20px;
+                color: #dcdcdc;
+            }
+        
+            ul {
+                list-style: none;
+                padding: 0;
+            }
+        
+            li {
+                margin: 10px 0;
+            }
+        
+            a {
+                text-decoration: none;
+                background-color: #007bff;
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+                display: inline-block;
+            }
+        
+            a:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    
+   
+>>>>>>> Funkciju_su_puslapiu_apjungimas
