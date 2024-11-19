@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
-    <!-- Navigation Menu -->
-=======
-=======
     <title>{% block title %}Mano Svetainė{% endblock %}</title>
 </head>
 <body>
@@ -17,6 +14,7 @@
             <img src="{{ url_for('static', filename='images/header.png') }}" alt="Puslapio galva">
         </div>
     </header>
+
     <!-- Main Navigation -->
     <nav>
                 <!-- <p>Sveiki, {% if session.get('username') %}{{ session.get('username') }}{% else %}Svečias{% endif %}</p> Pasveikinimas viršuje -->
@@ -29,6 +27,9 @@
                 <li><a href="{{ url_for('registracija.register') }}">Registruotis</a></li>
             {% endif %}
             <li><a href="{{ url_for('get_all_products') }}">Prekės</a></li>
+            {% if session.get('is_admin') %}
+                <li><a href="{{ url_for('admin.admin_dashboard') }}">Admin Meniu</a></li>
+            {% endif %}
         </ul>
     </nav>
 
@@ -50,15 +51,14 @@
                 <li><a href="{{ url_for('registracija.register') }}">Registruotis</a></li>
             {% endif %}
         </ul>
-    
-        {% if session.get('role') == 'admin' %}
+        {% if session.get('is_admin') %}
             <h2 class="sidebar-title">Admin meniu</h2>
             <ul>
-                <li><a href="{{ url_for('add_product') }}">Pridėti naują prekę</a></li>
-                <li><a href="{{ url_for('update_stock') }}">Papildyti prekių kiekį</a></li>
-                <li><a href="{{ url_for('remove_product') }}">Pašalinti prekę</a></li>
-                <li><a href="{{ url_for('delete_user') }}">Ištrinti vartotoją</a></li>
-                <li><a href="{{ url_for('product_stats') }}">Prekių statistika</a></li>
+                <li><a href="{{ url_for('admin.add_product') }}">Pridėti naują prekę</a></li>
+                <li><a href="{{ url_for('admin.update_stock') }}">Papildyti prekių kiekį</a></li>
+                <li><a href="{{ url_for('admin.remove_product') }}">Pašalinti prekę</a></li>
+                <li><a href="{{ url_for('admin.delete_user') }}">Ištrinti vartotoją</a></li>
+                <li><a href="{{ url_for('admin.product_stats') }}">Prekių statistika</a></li>
             </ul>
         {% endif %}
     </div>
