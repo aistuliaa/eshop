@@ -99,10 +99,25 @@ def balansas():
     flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
     return redirect(url_for('login'))
 
-@app.route('/add_balansas')
+@app.route('/add_balansas', methods=['GET', 'POST'])
 @login_required
 def add_balansas():
-    """Render page for adding balance."""
+    """Handle balance addition."""
+    if request.method == 'POST':
+        amount = request.form.get('amount')
+        try:
+            amount = float(amount) 
+            user = session.query(User).get(flask_session['user_id'])
+            user.balance += amount 
+            session.commit() 
+            flash('Balansas sėkmingai papildytas!', 'success')
+        except ValueError:
+            flash('Įveskite teisingą sumą.', 'error')
+        except Exception as e:
+            session.rollback()
+            flash(f'Klaida: {e}', 'error')
+        return redirect(url_for('balansas')) 
+
     return render_template('add_balansas.html')
 
 @app.route('/admin')
