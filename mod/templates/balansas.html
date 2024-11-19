@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Jūsų balansas: {{ balance }} EUR</h2>
+<div class="form-container">
+<h2>Jūsų balansas: {{ balance }} EUR</h2>
   <a href="{{ url_for('add_balansas') }}">Papildyti balansą</a>
+</div>  
 {% endblock %}
