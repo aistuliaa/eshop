@@ -5,6 +5,7 @@ from mod.model.admin_controller import admin_blueprint
 from mod.model.registracija import registracija_blueprint
 from mod.db import session
 from mod.model.idp_classes import User, Product, Cart
+from mod.model.cart_crud import add_to_cart, delete_from_cart, checkout_cart_with_review, get_products_in_cart
 # from mod.model.statistics_products import statistika, run_migrations
 # atnaujinimas
 
@@ -180,6 +181,40 @@ def add_balansas():
 @app.route('/statistika')
 def statistika():
         return redirect(url_for('statistika'))
+
+@app.route('/products')
+def product_list():
+    products = session.query(Product).all()  # Retrieve all products
+    return render_template('products.html', products=products)
+
+@app.route('/add-to-cart/<int:product_id>', methods=['POST'])
+def add_product_to_cart(product_id):
+    quantity = int(request.form.get('quantity', 1))
+    user_id = current_user.id  # Assume the current user is logged in
+    add_to_cart(user_id, product_id, quantity)
+    flash('Product added to cart!')
+    return redirect(url_for('product_list'))
+
+@app.route('/cart')
+def view_cart():
+    user_id = current_user.id  # Assume the current user is logged in
+    cart_items = session.query(Cart).join(Product, Cart.product_id == Product.id).filter(Cart.user_id == user_id).all()
+    return render_template('cart.html', cart_items=cart_items)
+
+@app.route('/delete-from-cart/<int:product_id>', methods=['POST'])
+def remove_product_from_cart(product_id):
+    quantity = int(request.form.get('quantity', 1))
+    user_id = current_user.id
+    delete_from_cart(user_id, product_id, quantity)
+    flash('Product removed from cart!')
+    return redirect(url_for('view_cart'))
+
+@app.route('/checkout', methods=['POST'])
+def checkout():
+    user_id = current_user.id
+    checkout_cart_with_review(user_id)
+    flash('Checkout successful!')
+    return redirect(url_for('product_list'))
 
 # Run the application
 if __name__ == '__main__':

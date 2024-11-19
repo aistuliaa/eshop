@@ -8,6 +8,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 def add_product(name, description, price, stock, category=None, rating=0.0):
+    """Add a new product to the database."""
     try:
         new_product = Product(
             name=name,
@@ -25,6 +26,7 @@ def add_product(name, description, price, stock, category=None, rating=0.0):
         print(f"Error adding product: {e}")
 
 def get_all_products():
+    """Retrieve all products from the database."""
     try:
         products = session.query(Product).all()
         return products
@@ -33,6 +35,7 @@ def get_all_products():
         return []
 
 def get_product_by_id(product_id):
+    """Retrieve a product by its ID."""
     try:
         product = session.query(Product).filter_by(id=product_id).first()
         return product
@@ -41,15 +44,22 @@ def get_product_by_id(product_id):
         return None
 
 def update_product(product_id, name=None, description=None, price=None, stock=None, category=None, rating=None):
+    """Update the details of an existing product."""
     try:
         product = session.query(Product).filter_by(id=product_id).first()
         if product:
-            if name: product.name = name
-            if description: product.description = description
-            if price is not None: product.price = price
-            if stock is not None: product.stock = stock
-            if category: product.category = category
-            if rating is not None: product.rating = rating
+            if name is not None:
+                product.name = name
+            if description is not None:
+                product.description = description
+            if price is not None:
+                product.price = price
+            if stock is not None:
+                product.stock = stock
+            if category is not None:
+                product.category = category
+            if rating is not None:
+                product.rating = rating
             session.commit()
             print(f"Product ID {product_id} updated successfully.")
         else:
@@ -59,6 +69,7 @@ def update_product(product_id, name=None, description=None, price=None, stock=No
         print(f"Error updating product: {e}")
 
 def delete_product(product_id):
+    """Delete a product by its ID."""
     try:
         product = session.query(Product).filter_by(id=product_id).first()
         if product:
@@ -71,15 +82,16 @@ def delete_product(product_id):
         session.rollback()
         print(f"Error deleting product: {e}")
 
-
-if __name__ == "__main__":
-
-    add_product(name="Sample Product", description="This is a test product.", price=10.99, stock=50, category="Test")
-
-    products = get_all_products()
-    for product in products:
-        print(product.name, product.price)
-
-    update_product(product_id=1, price=12.99, stock=45)
-
-    delete_product(product_id=3)
+def reduce_stock(product_id, quantity):
+    """Reduce the stock of a product after adding to the cart or purchase."""
+    try:
+        product = get_product_by_id(product_id)
+        if product and product.stock >= quantity:
+            product.stock -= quantity
+            session.commit()
+            print(f"Reduced stock for product ID {product_id} by {quantity}. Remaining stock: {product.stock}.")
+        else:
+            print(f"Not enough stock for product ID {product_id}.")
+    except SQLAlchemyError as e:
+        session.rollback()
+        print(f"Error reducing stock: {e}")
