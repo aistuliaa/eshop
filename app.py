@@ -157,6 +157,9 @@ def pirkejas():
     flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
     return redirect(url_for('login'))
 
+@app.route('/statistika')
+def statistika():
+        return redirect(url_for('statistika'))
 
 # Run the application
 if __name__ == '__main__':
