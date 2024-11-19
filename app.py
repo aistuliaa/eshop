@@ -135,12 +135,6 @@ def balansas():
     flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
     return redirect(url_for('login'))
 
-@app.route('/add_balansas')
-@login_required
-def add_balansas():
-    """Render page for adding balance."""
-    return render_template('add_balansas.html')
-
 @app.route('/admin')
 @login_required
 def admin_dashboard():
@@ -160,6 +154,28 @@ def pirkejas():
             return render_template('pirkejas.html', user=user)
     flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
     return redirect(url_for('login'))
+
+@app.route('/add_balansas', methods=['POST', 'GET'])
+@login_required
+def add_balansas():
+    """Handle balance top-up."""
+    if request.method == 'POST':
+        amount = request.form.get('amount')
+        if amount and amount.replace('.', '', 1).isdigit():  # Validate that the amount is a valid number
+            amount = float(amount)
+            # Here, add logic to update the user's balance in the database
+            user = session.query(User).get(flask_session['user_id'])
+            if user:
+                user.balance += amount
+                session.commit()  # Commit changes to the database
+                flash('Balansas sėkmingai papildytas!', 'success')
+            else:
+                flash('Nepavyko rasti vartotojo.', 'error')
+        else:
+            flash('Įveskite teisingą sumą.', 'error')
+        return redirect(url_for('add_balansas'))
+    
+    return render_template('add_balansas.html')
 
 @app.route('/statistika')
 def statistika():
