@@ -5,6 +5,7 @@ from mod.model.admin_controller import admin_blueprint
 from mod.model.registracija import registracija_blueprint
 from mod.db import session
 from mod.model.idp_classes import User, Product
+from mod.model.statistics_products import statistika, run_migrations
 
 app = Flask(__name__, template_folder='mod/templates')
 app.secret_key = 'dreamteam'
@@ -25,6 +26,8 @@ def load_user(user_id):
 def home():
     """Render the home page."""
     return render_template('index.html')
+
+app.add_url_rule('/statistika', view_func=statistika)
 
 from flask import request, render_template
 from sqlalchemy import and_
