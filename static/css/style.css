@@ -722,6 +722,7 @@ h1 {
             }
             
             .products li {
+                color: #000;
                 position: relative;
                 background: #fff;
                 border: 1px solid #ddd;
@@ -829,6 +830,7 @@ h1 {
 
   /* General Container Styling */
   .container {
+    color: #000;
     display: flex;
     flex-wrap: wrap; /* Leidžia elementams peržengti eilutės ribas, jei jų yra daugiau nei galima rodyti */
     justify-content: space-between; /* Paskirsto erdvę tarp elementų */
