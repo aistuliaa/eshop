@@ -172,9 +172,25 @@ def pirkejas():
     flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
     return redirect(url_for('login'))
 
-@app.route('/statistika')
-def statistika():
-        return redirect(url_for('statistika'))
+@app.route('/admin/statistika')
+@login_required
+def product_stats():
+    if not flask_session.get('is_admin'):
+        flash('Neturite prieigos teisių.', 'error')
+        return redirect(url_for('home'))
+    
+    # Duomenų gavimas iš DB (pavyzdys)
+    sales_data = session.query(...).all()  # Užpildykite realia užklausa
+    revenue_data = session.query(...).all()
+    months_data = session.query(...).all()
+    rated_products = session.query(...).all()
+
+    return render_template('statistika.html', 
+                           sales_data=sales_data, 
+                           revenue_data=revenue_data, 
+                           months_data=months_data, 
+                           rated_products=rated_products)
+
 
 # Run the application
 if __name__ == '__main__':

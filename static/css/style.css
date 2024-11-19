@@ -68,12 +68,13 @@ nav ul li a {
 
 /* Pakeičiamas stilius su hover efektu */
 nav ul li a:hover {
-    background-color: #575A49; /* Tamsesnis fonas užvedus pelę */
+    background-color: #ABA68D; /* Tamsesnis fonas užvedus pelę */
     color: #fff;
 }
 
 
 /* Sidebar */
+
 .sidebar {
     height: 100%;
     width: 250px;
@@ -84,6 +85,12 @@ nav ul li a:hover {
     color: white;
     padding-top: 20px;
     z-index: 10; /* Užtikrina, kad sidebar bus po meniu */
+}
+
+.sidebar ul li a:hover {
+    background-color: #ffffff; /* Ta pati spalva kaip navigacijoje užvedus */
+    color: rgb(255, 255, 255); /* Teksto spalva užvedus */
+    font-weight: bold; /* Paryškintas tekstas užvedus */
 }
 
 /* Meniu fiksavimas */
@@ -118,7 +125,9 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #575A49;
+    background-color: #ABA68D;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 }
 
 
@@ -518,7 +527,7 @@ h1 {
     }
 
     .all-products-link:hover {
-        background-color: #218838;
+        background-color: #ABA68D;
     }
 
     /* Flexbox forma */
@@ -548,7 +557,7 @@ h1 {
 
     .filter-form button {
         padding: 0.5rem 1rem;
-        background-color: #007BFF;
+        background-color: #16181a;
         color: white;
         border: none;
         border-radius: 0.3rem;
@@ -556,7 +565,7 @@ h1 {
     }
 
     .filter-form button:hover {
-        background-color: #0056b3;
+        background-color: #131415;
     }
 
     .products ul {
@@ -663,7 +672,7 @@ h1 {
         font-weight: bold;
         color: #333;
         padding: 10px;
-        background-color: #f0f0f0;
+        background-color: #272424;
         border-radius: 5px;
         margin: 10px 0;
         text-align: center;
@@ -684,7 +693,7 @@ h1 {
         font-weight: bold;
         color: #333;
         padding: 10px;
-        background-color: #f0f0f0;
+        background-color: #181616;
         border-radius: 5px;
         margin: 10px 0;
         text-align: center;
@@ -803,7 +812,7 @@ h1 {
         
             a {
                 text-decoration: none;
-                background-color: #007bff;
+                background-color: #16181a;
                 color: #fff;
                 padding: 10px 15px;
                 border-radius: 5px;
@@ -812,9 +821,15 @@ h1 {
             }
         
             a:hover {
-                background-color: #0056b3;
+                background-color: #ABA68D;
             }
+
+  
         </style>
+
+
+
+
     
    
 <<<<<<< HEAD
