@@ -35,6 +35,11 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+        <div class="cart-icon">
+            <a href="{{ url_for('pirkejas') }}"></a>
+                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Prekių krepšelis">
+            </a>
+        </div>
         <h2 class="sidebar-title">Pirkėjo meniu</h2>
         <div class="welcome-message">
             <p>Sveiki, {% if session.get('username') %}{{ session.get('username') }}{% else %}Svečias{% endif %}</p>
