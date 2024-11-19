@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Registruoti nariai</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Vartotojo vardas</th>
+            <th>Elektroninis paštas</th>
+            <th>Užsakymai</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.Vartotojo vardas }}</td>
+            <td>{{ user.Elektroninis paštas }}</td>
+            <td>
+                <a href="{{ url_for('admin.delete_user', user_id=user.id) }}">Ištrinti</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
