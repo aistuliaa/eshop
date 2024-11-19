@@ -4,7 +4,7 @@ from mod.model.user_controller import user_blueprint, admin_blueprint
 from mod.model.admin_controller import admin_blueprint
 from mod.model.registracija import registracija_blueprint
 from mod.db import session
-from mod.model.idp_classes import User, Product
+from mod.model.idp_classes import User, Product, Cart
 from mod.model.statistics_products import statistika, run_migrations
 
 app = Flask(__name__, template_folder='mod/templates')

@@ -23,6 +23,7 @@ class User(Base, UserMixin):
 
     audit_logs = relationship('AuditLog', back_populates='user')
     orders = relationship('Order', back_populates='user')
+    carts = relationship('Cart', back_populates='user')
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
@@ -102,15 +103,17 @@ class OrderItem(Base):
     order = relationship("Order", back_populates="items")
     product = relationship("Product", back_populates="order_items")
 
-# class Cart(Base):
-#     __tablename__ = 'carts'
+class Cart(Base):
+    __tablename__ = 'carts'
+    
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    product_id = Column(Integer, ForeignKey('products.id'))
+    quantity = Column(Integer)
 
-#     id = Column(Integer, primary_key=True)
-#     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-#     created_at = Column(DateTime, default=datetime.utcnow)
-#     items = relationship("CartItem", back_populates="cart")
-
-#     user = relationship("User", back_populates="cart")
+    # Define the inverse relationship
+    user = relationship('User', back_populates='carts')
+    product = relationship('Product')
 
 
 class Review(Base):
