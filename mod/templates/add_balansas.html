@@ -1,10 +1,25 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-    
-<div class="large-green-title">
-    +
-</div>
+  
+  <div class="form-container">
+    <!-- Form for adding balance -->
+    <h2>Papildykite savo balansą</h2>
+    <form method="POST" action="{{ url_for('add_balansas') }}">
+      <label for="amount">Suma (EUR):</label>
+      <input type="text" id="amount" name="amount" required>
+      <button type="submit">Papildyti</button>
+    </form>
 
-
-    {% endblock %}
+    <!-- Flash messages (success or error) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flash-messages">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+{% endblock %}

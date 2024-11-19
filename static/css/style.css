@@ -9,9 +9,25 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    justify-content: center;
 }
 
+.main-wrapper {
+    max-width: 1900px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh; /* Užtikrina, kad aukštis užims visą ekraną */
+    display: flex;
+    flex-direction: column; /* Jei turite kitų elementų viduje, šis stilius leis jiems tvarkingai išsidėstyti */
+    justify-content: center; /* Centruoja turinį vertikaliai */
+    background: url('{{ url_for("static", filename="images/background.jpg") }}') no-repeat center center;
+    background-size: cover;
+}
+
+
 nav {
+    left: 50%;
+    transform: translateX(-50%);
     opacity: 0.8; /* 80% nepermatomumas */
     background-color: #333;
     background: linear-gradient(to bottom, #575A49, #ABA68D);
@@ -52,22 +68,29 @@ nav ul li a {
 
 /* Pakeičiamas stilius su hover efektu */
 nav ul li a:hover {
-    background-color: #575A49; /* Tamsesnis fonas užvedus pelę */
+    background-color: #ABA68D; /* Tamsesnis fonas užvedus pelę */
     color: #fff;
 }
 
 
 /* Sidebar */
+
 .sidebar {
     height: 100%;
     width: 250px;
-    position: fixed;
+    
     top: 0;
     left: 0;
     background-color: #333;
     color: white;
     padding-top: 20px;
     z-index: 10; /* Užtikrina, kad sidebar bus po meniu */
+}
+
+.sidebar ul li a:hover {
+    background-color: #ffffff; /* Ta pati spalva kaip navigacijoje užvedus */
+    color: rgb(255, 255, 255); /* Teksto spalva užvedus */
+    font-weight: bold; /* Paryškintas tekstas užvedus */
 }
 
 /* Meniu fiksavimas */
@@ -102,7 +125,9 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #575A49;
+    background-color: #ABA68D;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 }
 
 
@@ -412,8 +437,7 @@ label {
 }
 
 /* Įvesties laukeliai */
-input[type="text"], 
-input[type="password"] {
+input {
     width: 100%;
     padding: 10px;
     font-size: 1em;
@@ -461,57 +485,7 @@ h1 {
     color: #333;
 }
 
-.products ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
 
-.products li {
-    position: relative;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: all 0.3s ease;
-    animation: fadeInUp 0.5s ease-out;
-}
-
-.products li:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.products li img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.products li h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #022316;
-}
-
-.products li p {
-    margin: 10px 0;
-}
-
-.products li p:last-of-type {
-    font-weight: bold;
-    color: #555;
-}
 
 
 
@@ -536,3 +510,343 @@ h1 {
 
        
 }
+
+<!-- Stiliai -->
+<style>
+    /* Nuorodos į visas prekes stilius */
+    .all-products-link {
+        display: inline-block;
+        margin: 1rem 0;
+        padding: 0.5rem 1rem;
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 0.3rem;
+        font-size: 1.1rem;
+    }
+
+    .all-products-link:hover {
+        background-color: #ABA68D;
+    }
+
+    /* Flexbox forma */
+    .filter-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: flex-end;
+    }
+
+    .filter-form div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-form label {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+        background-color: #f0f0f0;
+    }
+
+    .filter-form select,
+    .filter-form input {
+        padding: 0.4rem;
+        font-size: 1rem;
+    }
+
+    .filter-form button {
+        padding: 0.5rem 1rem;
+        background-color: #16181a;
+        color: white;
+        border: none;
+        border-radius: 0.3rem;
+        cursor: pointer;
+    }
+
+    .filter-form button:hover {
+        background-color: #131415;
+    }
+
+    .products ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .products li {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .customer-dashboard {
+        margin: 20px auto;
+        margin-top: -350px;
+        max-width: 1200px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Pagrindinis puslapio pavadinimas */
+    .customer-dashboard h1 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    /* Paskyros aprašymas */
+    .customer-dashboard p {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+    
+    /* Akcijų blokai */
+    .customer-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    /* Kiekvienas veiksmo blokas */
+    .customer-actions > div {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Pavadinimas kiekviename bloke */
+    .customer-actions h2 {
+        font-size: 22px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+    
+    /* Balanso informacija */
+    .balance-info p {
+        font-size: 18px;
+        color: #007bff;
+    }
+    
+    /* Papildymo forma */
+    .add-balance input,
+    .add-balance button {
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .add-balance button {
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;
+    }
+    
+    .add-balance button:hover {
+        background-color: #218838;
+    }
+    
+    /* Užsakymų istorijos sąrašas */
+    .order-history ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .order-history li {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    
+    .order-history p {
+        font-size: 16px;
+        color: #888;
+    }
+    .welcome-message {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        padding: 10px;
+        background-color: #272424;
+        border-radius: 5px;
+        margin: 10px 0;
+        text-align: center;
+            white-space: normal;  /* Užtikrina, kad tekstas bus pertraukiamas */
+            word-wrap: break-word; /* Padeda pertraukti žodžius, kad tilptų */
+            overflow-wrap: break-word; /* Alternatyvus būdas pertraukti žodžius */
+       
+        
+    }
+    
+    .welcome-message p {
+        margin: 0;
+    }
+    
+    
+    .welcome-message {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        padding: 10px;
+        background-color: #181616;
+        border-radius: 5px;
+        margin: 10px 0;
+        text-align: center;
+        position: relative;
+        animation: backgroundChange 4s ease-in-out forwards;    }
+
+        
+        @keyframes backgroundChange {
+            0% {
+                background-color: #000; /* Juodas fonas */
+            }
+            50% {
+                background-color: #fff; /* Baltas fonas */
+            }
+
+            }
+            .products ul {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .products li {
+                position: relative;
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                width: 300px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                transition: all 0.3s ease;
+                animation: fadeInUp 0.5s ease-out;
+            }
+            
+            .products li:hover {
+                transform: translateY(-15px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+            
+            .products li img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                margin-bottom: 15px;
+            }
+            
+            .products li h2 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+                color: #022316;
+            }
+            
+            .products li p {
+                margin: 10px 0;
+            }
+            
+            .products li p:last-of-type {
+                font-weight: bold;
+                color: #555;
+            }
+    
+<<<<<<< HEAD
+    
+            .visiproduktai {
+                font-weight: bold;
+                color: #000000;
+            }
+=======
+            <style>
+            body {
+                background: url('background-pattern.png') no-repeat center center fixed;
+                background-size: cover;
+                font-family: Arial, sans-serif;
+                color: #fff;
+                text-align: center;
+            }
+        
+            .admin-dashboard {
+                background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+                border-radius: 10px;
+                padding: 20px;
+                margin: 100px auto;
+                display: inline-block;
+                max-width: 400px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                margin-top: -300px;
+            }
+        
+            h1 {
+                font-size: 28px;
+                color: #ffffff;
+                margin-bottom: 15px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            }
+        
+            p {
+                font-size: 16px;
+                margin-bottom: 20px;
+                color: #dcdcdc;
+            }
+        
+            ul {
+                list-style: none;
+                padding: 0;
+            }
+        
+            li {
+                margin: 10px 0;
+            }
+        
+            a {
+                text-decoration: none;
+                background-color: #16181a;
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+                display: inline-block;
+            }
+        
+            a:hover {
+                background-color: #ABA68D;
+            }
+
+  /* General Container Styling */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: -500px;
+}
+
+
+  
+        </style>
+
+
+
+
+    
+   
+<<<<<<< HEAD
+>>>>>>> b93360cc7d065effbad7e499d8ec53aee1df6fd2
+=======
+>>>>>>> Funkciju_su_puslapiu_apjungimas
+>>>>>>> 9ff5647f1e40ba1508871eafdbd5f8f3f44d6d42

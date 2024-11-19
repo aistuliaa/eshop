@@ -103,69 +103,51 @@ def run_migrations():
 
 
 
-@app.route('/templates/sales_per_day')
-def sales_per_day():
+@app.route('/statistika')
+def statistika():
     try:
+        # Pardavimų duomenys pagal dieną
         sales_data = session.query(
             Order.order_date,
             func.sum(OrderItem.quantity).label('total_sold')
         ).join(OrderItem, Order.id == OrderItem.order_id).group_by(Order.order_date).all()
-        
-        logger.info("successfully.")
-        return render_template('sales_per_day.html', sales_data=sales_data)
 
-    except Exception as e:
-        logger.error(f"Error fetching sales per day: {e}")
-        return "An error occurred", 500
-
-
-@app.route('/templates/revenue_per_day')
-def revenue_per_day():
-    try:
+        # Pajamų duomenys pagal dieną
         revenue_data = session.query(
             Order.order_date,
             func.sum(OrderItem.quantity * OrderItem.price_at_purchase).label('total_revenue')
         ).join(OrderItem, Order.id == OrderItem.order_id).group_by(Order.order_date).all()
 
-        logger.info(" successfully.")
-        return render_template('revenue_per_day.html', revenue_data=revenue_data)
-
-    except Exception as e:
-        logger.error(f"Error fetching revenue per day: {e}")
-        return "An error occurred", 500
-
-
-@app.route('/templates/top_months')
-def top_months():
-    try:
+        # Geriausi mėnesiai pagal pajamas
         months_data = session.query(
             extract('year', Order.order_date).label('year'),
             extract('month', Order.order_date).label('month'),
             func.sum(OrderItem.quantity * OrderItem.price_at_purchase).label('total_revenue')
-        ).join(OrderItem, Order.id == OrderItem.order_id).group_by("year", "month").order_by(func.sum(OrderItem.quantity * OrderItem.price_at_purchase).desc()).all()
+        ).join(OrderItem, Order.id == OrderItem.order_id).group_by("year", "month").order_by(
+            func.sum(OrderItem.quantity * OrderItem.price_at_purchase).desc()
+        ).all()
 
-        logger.info("months statistics successfully.")
-        return render_template('top_months.html', months_data=months_data)
-
-    except Exception as e:
-        logger.error(f"Error fetching top months: {e}")
-        return "An error occurred", 500
-
-
-@app.route('/stats/top_rated_products')
-def top_rated_products():
-    try:
+        # Geriausiai įvertinti produktai
         rated_products = session.query(
             Product.name,
             func.avg(Review.rating).label('average_rating')
-        ).join(Review, Product.id == Review.product_id).group_by(Product.id).order_by(func.avg(Review.rating).desc()).limit(5).all()
+        ).join(Review, Product.id == Review.product_id).group_by(Product.id).order_by(
+            func.avg(Review.rating).desc()
+        ).limit(5).all()
 
-        logger.info("Fetched top rated products successfully.")
-        return render_template('top_rated_products.html', rated_products=rated_products)
+        
+        return render_template(
+            'statistika.html',
+            sales_data=sales_data,
+            revenue_data=revenue_data,
+            months_data=months_data,
+            rated_products=rated_products
+        )
 
     except Exception as e:
-        logger.error(f"Error fetching top rated products: {e}")
+        logger.error(f"Error generating dashboard: {e}")
         return "An error occurred", 500
+
 
 
 if __name__ == '__main__':
