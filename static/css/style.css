@@ -514,7 +514,7 @@ h1 {
 }
 
 /* <!-- Stiliai --> */
-<style>
+
     /* Nuorodos į visas prekes stilius */
     .all-products-link {
         display: inline-block;
@@ -771,7 +771,7 @@ h1 {
                 color: #000000;
             }
 /* ======= */
-            <style>
+        
             body {
                 background: url('background-pattern.png') no-repeat center center fixed;
                 background-size: cover;
