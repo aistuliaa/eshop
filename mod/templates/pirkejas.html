@@ -3,6 +3,11 @@
 {% block title %}Pirkėjo Puslapis{% endblock %}
 
 {% block content %}
+
+<div class="form-container">
+    <h2>Jūsų balansas: {{ balance }} EUR</h2>
+      <a href="{{ url_for('add_balansas') }}">Papildyti balansą</a>
+    </div>  
 <div class="customer-dashboard">
     <h1>Sveiki, {{ session.get('username') }}!</h1>
     <p>Čia galite matyti ir tvarkyti savo paskyros informaciją.</p>

@@ -35,6 +35,11 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+        <div class="cart-icon">
+            <a href="{{ url_for('pirkejas') }}"></a>
+                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Prekių krepšelis">
+            </a>
+        </div>
         <h2 class="sidebar-title">Pirkėjo meniu</h2>
         <div class="welcome-message">
             <p>Sveiki, {% if session.get('username') %}{{ session.get('username') }}{% else %}Svečias{% endif %}</p>
@@ -58,7 +63,7 @@
                 <li><a href="{{ url_for('admin.update_stock') }}">Papildyti prekių kiekį</a></li>
                 <li><a href="{{ url_for('admin.remove_product') }}">Pašalinti prekę</a></li>
                 <li><a href="{{ url_for('admin.delete_user') }}">Ištrinti vartotoją</a></li>
-                <li><a href="{{ url_for('product_stats') }}">Prekių statistika</a></li>            </ul>
+                <li><a href="{{ url_for('admin.product_stats') }}">Prekių statistika</a></li>          </ul>
         {% endif %}
     </div>
 
