@@ -9,9 +9,10 @@
 
     <div class="admin-actions">
         <ul>
-            <li><a href="{{ url_for('view_users') }}">Peržiūrėti vartotojus</a></li>
-            <li><a href="{{ url_for('manage_products') }}">Tvarkyti prekes</a></li>
-            <li><a href="{{ url_for('view_orders') }}">Peržiūrėti užsakymus</a></li>
+            <li><a href="{{ url_for('admin.view_users') }}">Peržiūrėti vartotojus</a></li>
+            <li><a href="{{ url_for('admin.manage_products') }}">Tvarkyti prekes</a></li>
+            <li><a href="{{ url_for('admin.add_product') }}">Tvarkyti prekes</a></li>
+            <li><a href="{{ url_for('admin.view_orders') }}">Peržiūrėti užsakymus</a></li>
             <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
         </ul>
     </div>
