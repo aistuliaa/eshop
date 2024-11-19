@@ -1,10 +1,6 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-    <div class="large-green-balance">
-        Jūsų balansas:
-    </div>
-    <div class="large-green-title">
-        {{ balance }}
-    </div>
+  <h2>Jūsų balansas: {{ balance }} EUR</h2>
+  <a href="{{ url_for('add_balansas') }}">Papildyti balansą</a>
 {% endblock %}
