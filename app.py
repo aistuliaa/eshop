@@ -6,6 +6,7 @@ from mod.model.registracija import registracija_blueprint
 from mod.db import session
 from mod.model.idp_classes import User, Product, Cart
 from mod.model.statistics_products import statistika, run_migrations
+# atnaujinimas
 
 app = Flask(__name__, template_folder='mod/templates')
 app.secret_key = 'dreamteam'
