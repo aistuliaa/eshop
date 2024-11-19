@@ -400,6 +400,7 @@ nav ul li a:hover {
 
 /* Formos konteineris */
 .form-container {
+    color: #000;
     background: #ffffff;
     padding: 20px 30px;
     border-radius: 10px;
