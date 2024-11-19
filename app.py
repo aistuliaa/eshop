@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, url_for, redirect, flash, session as flask_session
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
-from mod.model.user_controller import user_blueprint
+from mod.model.user_controller import user_blueprint, admin_blueprint
+from mod.model.admin_controller import admin_blueprint
 from mod.model.registracija import registracija_blueprint
 from mod.db import session
 from mod.model.idp_classes import User, Product
@@ -10,6 +11,7 @@ app.secret_key = 'dreamteam'
 
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(registracija_blueprint, url_prefix='/auth')
+app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -24,6 +26,58 @@ def home():
     """Render the home page."""
     return render_template('index.html')
 
+from flask import request, render_template
+from sqlalchemy import and_
+
+@app.route('/cargo')
+def get_all_products():
+    # Gauti užklausos parametrus
+    sort_by = request.args.get('sort', 'name')  # Numatytoji rūšiavimo reikšmė
+    category = request.args.get('category', '')  # Filtras pagal kategoriją
+    min_price = request.args.get('min_price', type=float)
+    max_price = request.args.get('max_price', type=float)
+    search = request.args.get('search', '')  # Paieška pagal pavadinimą
+
+    # Užklausa į duomenų bazę
+    query = session.query(Product)
+
+    # Filtravimas pagal kategoriją
+    if category:
+        query = query.filter(Product.category == category)
+
+    # Filtravimas pagal kainos intervalą
+    if min_price is not None:
+        query = query.filter(Product.price >= min_price)
+    if max_price is not None:
+        query = query.filter(Product.price <= max_price)
+
+    # Filtravimas pagal pavadinimą (paieška)
+    if search:
+        query = query.filter(Product.name.ilike(f"%{search}%"))
+
+    # Rūšiavimas
+    if sort_by in ['name', 'price', 'rating', 'category']:
+        query = query.order_by(getattr(Product, sort_by))
+    
+    # Gauti rezultatus
+    products = query.all()
+
+    return render_template('prekes.html', products=products)
+
+
+# @app.route('/cargo')
+# def get_all_products():
+#     from mod.model.idp_classes import Product
+#     from mod.db import session
+#     products = session.query(Product).all()
+#     return render_template('prekes.html', products=products)
+
+# @app.route('/cargo')
+# def get_all_products():
+#     """Display all products."""
+#     products = session.query(Product).all()
+#     return render_template('prekes.html', products=products)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Handle login functionality."""
@@ -36,7 +90,10 @@ def login():
             login_user(user)
             flask_session['user_id'] = user.id
             flask_session['username'] = user.username
+            flask_session['is_admin'] = user.is_admin
             flash('Prisijungta sėkmingai!', 'success')
+            if user.is_admin:
+                return redirect(url_for('admin_dashboard'))
             return redirect(url_for('home'))
         else:
             flash('Neteisingas vartotojo vardas arba slaptažodis.', 'error')
@@ -52,22 +109,16 @@ def logout():
     flash('Sėkmingai atsijungėte.', 'success')
     return redirect(url_for('home'))
 
-@app.route('/cargo')
-def get_all_products():
-    """Display all products."""
-    products = session.query(Product).all()
-    return render_template('prekes.html', products=products)
-
-@app.route('/pirkejas')
-@login_required
-def pirkejas():
-    """Render the customer page."""
-    if 'user_id' in flask_session:
-        user = session.query(User).get(flask_session['user_id'])
-        if user:
-            return render_template('pirkejas.html', user=user)
-    flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
-    return redirect(url_for('login'))
+# @app.route('/pirkejas')
+# @login_required
+# def pirkejas():
+#     """Render the customer page."""
+#     if 'user_id' in flask_session:
+#         user = session.query(User).get(flask_session['user_id'])
+#         if user:
+#             return render_template('pirkejas.html', user=user)
+#     flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
+#     return redirect(url_for('login'))
 
 @app.route('/balansas')
 @login_required
@@ -90,10 +141,22 @@ def add_balansas():
 @login_required
 def admin_dashboard():
     """Render the admin dashboard."""
-    if current_user.role != 'admin':
+    if not flask_session.get('is_admin'):
         flash('Neturite prieigos teisių.', 'error')
         return redirect(url_for('home'))
-    return render_template('admin/dashboard.html')
+    return render_template('admin.html')
+
+@app.route('/pirkejas')
+@login_required
+def pirkejas():
+    """Render the customer page."""
+    if 'user_id' in flask_session:
+        user = session.query(User).get(flask_session['user_id'])
+        if user:
+            return render_template('pirkejas.html', user=user)
+    flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
+    return redirect(url_for('login'))
+
 
 # Run the application
 if __name__ == '__main__':

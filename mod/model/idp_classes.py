@@ -13,6 +13,7 @@ class User(Base, UserMixin):
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(100), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
+    is_admin = Column(Boolean, default=False)
     balance = Column(Float, default=0.0)
     is_blocked = Column(Boolean, default=False)
     failed_logins = Column(Integer, default=0)
@@ -49,14 +50,10 @@ class User(Base, UserMixin):
 
 class Product(Base):
     __tablename__ = 'products'
-
     id = Column(Integer, primary_key=True)
-    name = Column(String(100), nullable=False)
-    description = Column(String(255))
-    price = Column(Float, nullable=False)
-    stock = Column(Integer, default=0)
-    category = Column(String(50))
-    rating = Column(Float, default=0.0)
+    name = Column(String)
+    order_items = relationship("OrderItem", back_populates="product")
+    reviews = relationship("Review", back_populates="product")
 
     def __repr__(self):
         return f"<Product(name={self.name}, price={self.price})>"
@@ -70,6 +67,29 @@ class AuditLog(Base):
     timestamp = Column(DateTime, default=datetime.utcnow)
 
     user = relationship('User', back_populates='audit_logs')
+
+class Order(Base):
+    __tablename__ = 'orders'
+    id = Column(Integer, primary_key=True)
+    order_date = Column(DateTime)
+    items = relationship("OrderItem", back_populates="order")
+
+class OrderItem(Base):
+    __tablename__ = 'order_items'
+    id = Column(Integer, primary_key=True)
+    order_id = Column(Integer, ForeignKey('orders.id'))
+    product_id = Column(Integer, ForeignKey('products.id'))
+    quantity = Column(Integer)
+    price_at_purchase = Column(Float)
+    order = relationship("Order", back_populates="items")
+    product = relationship("Product", back_populates="order_items")
+
+class Review(Base):
+    __tablename__ = 'reviews'
+    id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey('products.id'))
+    rating = Column(Float)
+    product = relationship("Product", back_populates="reviews")
 
 User.audit_logs = relationship('AuditLog', back_populates='user')
 
