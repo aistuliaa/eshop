@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Atnaujinti Prekių Kiekį</h2>
+<div class="container">
 <form method="POST">
     <label for="product_id">Prekė:</label>
     <select name="product_id" id="product_id">
@@ -11,5 +12,5 @@
     <label for="new_stock">Naujas Kiekis:</label>
     <input type="number" name="new_stock" id="new_stock" required>
     <button type="submit">Atnaujinti</button>
-</form>
+</form></div>
 {% endblock %}

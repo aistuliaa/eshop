@@ -786,6 +786,7 @@ h1 {
                 display: inline-block;
                 max-width: 400px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                margin-top: -300px;
             }
         
             h1 {
@@ -824,7 +825,16 @@ h1 {
                 background-color: #ABA68D;
             }
 
-  
+  /* General Container Styling */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: -500px;
+}
         </style>
 
 
