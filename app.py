@@ -27,7 +27,7 @@ def home():
     """Render the home page."""
     return render_template('index.html')
 
-app.add_url_rule('/statistika', view_func=statistika)
+# app.add_url_rule('/statistika', view_func=statistika)
 
 from flask import request, render_template
 from sqlalchemy import and_
@@ -134,25 +134,10 @@ def balansas():
     flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
     return redirect(url_for('login'))
 
-@app.route('/add_balansas', methods=['GET', 'POST'])
+@app.route('/add_balansas')
 @login_required
 def add_balansas():
-    """Handle balance addition."""
-    if request.method == 'POST':
-        amount = request.form.get('amount')
-        try:
-            amount = float(amount) 
-            user = session.query(User).get(flask_session['user_id'])
-            user.balance += amount 
-            session.commit() 
-            flash('Balansas sėkmingai papildytas!', 'success')
-        except ValueError:
-            flash('Įveskite teisingą sumą.', 'error')
-        except Exception as e:
-            session.rollback()
-            flash(f'Klaida: {e}', 'error')
-        return redirect(url_for('balansas')) 
-
+    """Render page for adding balance."""
     return render_template('add_balansas.html')
 
 @app.route('/admin')
@@ -175,25 +160,9 @@ def pirkejas():
     flash('Norint pasiekti šį puslapį, reikia prisijungti.', 'error')
     return redirect(url_for('login'))
 
-@app.route('/admin/statistika')
-@login_required
-def product_stats():
-    if not flask_session.get('is_admin'):
-        flash('Neturite prieigos teisių.', 'error')
-        return redirect(url_for('home'))
-    
-    # Duomenų gavimas iš DB (pavyzdys)
-    sales_data = session.query(...).all()  # Užpildykite realia užklausa
-    revenue_data = session.query(...).all()
-    months_data = session.query(...).all()
-    rated_products = session.query(...).all()
-
-    return render_template('statistika.html', 
-                           sales_data=sales_data, 
-                           revenue_data=revenue_data, 
-                           months_data=months_data, 
-                           rated_products=rated_products)
-
+@app.route('/statistika')
+def statistika():
+        return redirect(url_for('statistika'))
 
 # Run the application
 if __name__ == '__main__':

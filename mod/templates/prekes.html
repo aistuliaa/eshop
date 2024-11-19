@@ -54,8 +54,10 @@
             <ul>
                 {% for product in products %}
                     <li>
-                        <strong>{{ product.name }}</strong> - ${{ product.price }}<br>
-                        <em>{{ product.description }}</em> | Stock: {{ product.stock }} | Category: {{ product.category }}
+                        <strong>{{ product.name }}</strong> - ${{ product.price|default('0.00') }}<br>
+                        <em>{{ product.description|default('No description available') }}</em> | 
+                        Stock: {{ product.stock|default('Nsdfa') }} | 
+                        Category: {{ product.category|default('Uncategorized') }}
                     </li>
                 {% endfor %}
             </ul>

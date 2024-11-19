@@ -2,7 +2,7 @@ import datetime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-from mod.model.idp_classes import Base, User, Product, Cart, Order, OrderItem, Review, AuditLog 
+from mod.model.idp_classes import Base, User, Product, Order, OrderItem, Review, AuditLog 
 
 engine = create_engine('sqlite:///mod/db/duombaze.db', echo=False)
 Base.metadata.create_all(engine)  # Ensures all tables are created
