@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Prekių Statistika{% endblock %}
+
+{% block content %}
+
+<section id="sales" class="active">
+    <h1>Sales Per Day</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order Date</th>
+                <th>Total Sold</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales_data %}
+            <tr>
+                <td>{{ sale.order_date }}</td>
+                <td>{{ sale.total_sold }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section id="revenue">
+    <h1>Revenue Per Day</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order Date</th>
+                <th>Total Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for revenue in revenue_data %}
+            <tr>
+                <td>{{ revenue.order_date }}</td>
+                <td>{{ revenue.total_revenue }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section id="months">
+    <h1>Top Months</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Total Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for month in months_data %}
+            <tr>
+                <td>{{ month.year }}</td>
+                <td>{{ month.month }}</td>
+                <td>{{ month.total_revenue }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section id="products">
+    <h1>Top Rated Products</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Average Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in rated_products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.average_rating }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
