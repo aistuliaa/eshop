@@ -181,6 +181,11 @@ def add_balansas():
 def statistika():
         return redirect(url_for('statistika'))
 
+@app.route('/asmenine_uzduotis', methods=['GET', 'POST'])
+def asmenine_uzduotis():
+    """Priima uzklausas ir grazina i pagrindini puslapi."""
+    return render_template('index.html')
+
 # Run the application
 if __name__ == '__main__':
     app.run(debug=True)
