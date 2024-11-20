@@ -7,10 +7,10 @@
 <div class="main-content">
     {% if session.get('user_id') %}
     <h1>Sveiki atvykę į Prekių pasaulį, {{ session.get('username') }}!</h1>
-    <p>Dėkojame, kad pasirinkote mus!</p>
+    <p>Dėkojame, kad pasirinkote mus! Jus sveikina Aistė Siudikaitė</p>
 {% else %}
     <h1>Sveiki atvykę į Prekių pasaulį!</h1>
-    <p>Pirkite, pirkite, pirkite</p>
+    <p>Pirkite, pirkite, pirkite iš mūsų ir ypač iš Aistė Siudikaitė</p>
 {% endif %}
     <img src="{{ url_for('static', filename='images/pirk.webp') }}" alt="Pirk">
 </div>
