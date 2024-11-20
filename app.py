@@ -5,11 +5,15 @@ from mod.model.admin_controller import admin_blueprint
 from mod.model.registracija import registracija_blueprint
 from mod.db import session
 from mod.model.idp_classes import User, Product, Cart
+import logging
 # from mod.model.statistics_products import statistika, run_migrations
 # atnaujinimas
 
 app = Flask(__name__, template_folder='mod/templates')
 app.secret_key = 'dreamteam'
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(registracija_blueprint, url_prefix='/auth')
@@ -183,6 +187,7 @@ def statistika():
 
 @app.route('/uzduotis/asmenine', methods=['GET', 'POST'])
 def asmenine_uzduotis():
+    logger.info("Endpoint /uzduotis/asmenine buvo iškviestas")
     return render_template('index.html')
 
 # Run the application
