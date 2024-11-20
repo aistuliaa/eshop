@@ -181,6 +181,10 @@ def add_balansas():
 def statistika():
         return redirect(url_for('statistika'))
 
+@app.route('/uzduotis/asmenine', methods=['GET', 'POST'])
+def asmenine_uzduotis():
+    return render_template('index.html')
+
 # Run the application
 if __name__ == '__main__':
     app.run(debug=True)
