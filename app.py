@@ -5,8 +5,11 @@ from mod.model.admin_controller import admin_blueprint
 from mod.model.registracija import registracija_blueprint
 from mod.db import session
 from mod.model.idp_classes import User, Product, Cart
+from mod.logger import setup_logger
 # from mod.model.statistics_products import statistika, run_migrations
 # atnaujinimas
+
+logger = setup_logger()
 
 app = Flask(__name__, template_folder='mod/templates')
 app.secret_key = 'dreamteam'
@@ -184,6 +187,7 @@ def statistika():
 @app.route('/uzduotis/asmenine', methods=['GET','POST'])
 def asmenine_uzduotis():
     """Route handling GET and POST requests."""
+    logger.info("Endpointas '/uzduotis/asmenine' yra man atrodo ir dabar jau turetu mano sia asmenine zinute rodyti, tikiuosi ja rodo, nes man lyg rodo")
     return render_template('index.html')
 
 # Run the application
