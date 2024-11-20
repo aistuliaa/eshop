@@ -5,6 +5,7 @@ from mod.model.admin_controller import admin_blueprint
 from mod.model.registracija import registracija_blueprint
 from mod.db import session
 from mod.model.idp_classes import User, Product, Cart
+import logging
 # from mod.model.statistics_products import statistika, run_migrations
 # atnaujinimas
 
@@ -18,6 +19,9 @@ app.register_blueprint(admin_blueprint, url_prefix='/admin')
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -184,6 +188,7 @@ def statistika():
 @app.route('/asmenine_uzduotis', methods=['GET', 'POST'])
 def asmenine_uzduotis():
     """Priima uzklausas ir grazina i pagrindini puslapi."""
+    logger.info(f"Raminta Bartuliene bando mokytis dirbtini intelekta {request.method} ")
     return render_template('index.html')
 
 # Run the application
