@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Registruoti nariai</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vartotojo vardas</th>
+            <th>El. paštas</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user['ID'] }}</td>
+            <td>{{ user['Vartotojo vardas'] }}</td>
+            <td>{{ user['El. paštas'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

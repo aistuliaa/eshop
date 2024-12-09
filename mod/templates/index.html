@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Prekių pasaulis{% endblock %}
+
+{% block content %}
+<!-- Pagrindinis turinys -->
+<div class="main-content">
+    {% if session.get('user_id') %}
+    <h1>Sveiki atvykę į Prekių pasaulį, {{ session.get('username') }}!</h1>
+    <p>Dėkojame, kad pasirinkote mus!</p>
+{% else %}
+    <h1>Sveiki atvykę į Prekių pasaulį!</h1>
+    <p>Pirkite, pirkite, pirkite</p>
+{% endif %}
+    <img src="{{ url_for('static', filename='images/pirk.webp') }}" alt="Pirk">
+</div>
+{% endblock %}

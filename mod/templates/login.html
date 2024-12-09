@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Prisijungti{% endblock %}
+
+{% block content %}
+
+<h1>Prisijungti</h1>
+<div class="form-container">
+    <form method="POST" action="{{ url_for('login') }}">
+        <label for="username">Vartotojo vardas:</label>
+        <input type="text" name="username" id="username"><br>
+        <label for="password">Slaptažodis:</label>
+        <input type="password" name="password" id="password"><br>
+        <input type="submit" value="Prisijungti">
+    </form>
+    <p><a href="{{ url_for('registracija.register') }}">Neturite paskyros? Registruokitės</a></p>
+</div>
+{% endblock %}

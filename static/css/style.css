@@ -1,0 +1,879 @@
+
+
+body {
+    background: url('fonfon.jpg');
+    background-size: cover; /* Paveikslėlis užims visą ekraną, išlaikant proporcijas */
+    background-attachment: fixed; /* Fiksuoja paveikslėlį ekrano fone, kad jis neslinktų */
+    background-repeat: repeat;
+    background-size: auto;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.main-wrapper {
+    max-width: 1900px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh; /* Užtikrina, kad aukštis užims visą ekraną */
+    display: flex;
+    flex-direction: column; /* Jei turite kitų elementų viduje, šis stilius leis jiems tvarkingai išsidėstyti */
+    justify-content: center; /* Centruoja turinį vertikaliai */
+    background: url('{{ url_for("static", filename="images/background.jpg") }}') no-repeat center center;
+    background-size: cover;
+}
+
+
+nav {
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.8; /* 80% nepermatomumas */
+    background-color: #333;
+    background: linear-gradient(to bottom, #575A49, #ABA68D);
+    overflow: hidden;
+    position: fixed;
+    top: 300px;
+    width: 100%;
+    height: 70px;
+    z-index: 8;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+
+
+
+/* Meniu elementų stilius */
+nav ul {
+    list-style-type: none; /* Pašalina sąrašų ženklelius */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Padaro meniu elementus horizontaliais */
+    justify-content: center; /* Centruoja meniu elementus */
+}
+
+/* Meniu elementai */
+nav ul li {
+    padding: 15px 20px;
+}
+
+/* Meniu nuorodos */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 10px;
+    display: block;
+}
+
+/* Pakeičiamas stilius su hover efektu */
+nav ul li a:hover {
+    background-color: #ABA68D; /* Tamsesnis fonas užvedus pelę */
+    color: #fff;
+}
+
+
+/* Sidebar */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed; /* Make the sidebar fixed on the page */
+    top: 0;
+    left: 0;
+    background-color: #333;
+    color: white;
+    padding-top: 20px;
+    z-index: 10; /* Ensures sidebar is on top of the content */
+    overflow-y: auto; /* Adds scroll functionality when content exceeds the sidebar height */
+    max-height: 100vh; /* Limits sidebar height to the viewport height */
+}
+
+.sidebar ul li a:hover {
+    background-color: #ffffff; /* Hover background color */
+    color: rgb(255, 255, 255); /* Text color on hover */
+    font-weight: bold; /* Bold text on hover */
+}
+
+
+/* Meniu fiksavimas */
+nav {
+    position: fixed; /* Sticky efektas */
+    top: 0px; /* Meniu prilimpa po header (jei header yra 70px aukščio) */
+    z-index: 12; /* Meniu sluoksnio prioritetas */
+    background: linear-gradient(to bottom, #575A49, #ABA68D);
+    height: 70px; /* Aukštis */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Šešėlis */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+/* Bendras meniu stilius */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* Atstumas tarp meniu elementų */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background-color: #ABA68D;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+
+
+
+/* Pagrindinio turinio centravimas */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+    background: url('fonfon.jpg');
+    background-size: cover; /* Paveikslėlis užims visą ekraną, išlaikant proporcijas */
+    background-attachment: fixed; /* Fiksuoja paveikslėlį ekrano fone, kad jis neslinktų */
+    background-repeat: repeat;
+    background-size: auto;
+    padding: 20px;
+    
+}
+
+.main-content h1,
+.main-content p {
+    background-color: white; /* Baltas fonas */
+    padding: 10px;  /* Tarpas aplink tekstą */
+    border-radius: 5px;  /* Apvalūs kampai */
+}
+
+
+/* Šoninis meniu */
+.sidebar {
+    position: fixed; /* Sidebar liks vietoje slenkant */
+    top: 140px; /* Pradedamas rodyti žemiau header ir meniu */
+    left: 0;
+    width: 250px;
+    height: calc(100% - 140px); /* Užima visą likusį ekraną */
+    background: linear-gradient(to bottom, #000000, #575A49);
+    padding: 20px;
+    z-index: 11;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Šešėlis */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757;
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    
+}
+
+.sidebar-title {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    background: url('fonfon.jpg') no-repeat center center;
+    background-size: cover; /* Pritaikytas fono dydis */
+    color: rgb(255, 255, 255); /* Balta spalva, kad geriau matytųsi */
+    padding: 10px;
+    border-radius: 8px;
+    position: relative; /* Būtina, kad pseudo elementai veiktų */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); /* Šešėlis aplink tekstą */
+}
+
+.sidebar-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit; /* Paveldime foną iš pagrindinės elementų */
+    filter: blur(15px); /* Mažesnis miglojimo efektas */
+    z-index: -1; /* Už tekstą */
+    border-radius: 8px; /* Suapvalinti kampai */
+}
+
+
+
+
+/* Styling for large green title */
+.large-green-title {
+    font-size: 30vw;
+    font-weight: bold;
+    color: green;
+    text-align: center;
+    margin-top: 0px;
+    animation: colorChange 3s infinite;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Teksto šešėlis */
+    display: inline-block; /* Užtikrina, kad fonas apgaubs tik tekstą */
+    padding: 20px; /* Sukuria tarpą tarp teksto ir kraštų */
+    background-color: rgba(255, 255, 255, 0.8); /* Permatomas baltas fonas */
+    border-radius: 10px; /* Užapvalinti kampai */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Šešėlis aplink foną */
+}
+
+/* Styling for large green balance */
+.large-green-balance {
+    font-size: 4vw;
+    font-weight: bold;
+    color: rgb(36, 49, 36);
+    text-align: center;
+    margin-top: 5px;
+    animation: colorChange 3s infinite;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Teksto šešėlis */
+    display: inline-block; /* Užtikrina, kad fonas apgaubs tik tekstą */
+    padding: 25px; /* Sukuria tarpą tarp teksto ir kraštų */
+    background-color: rgba(255, 255, 255, 0.8); /* Permatomas baltas fonas */
+    border-radius: 10px; /* Užapvalinti kampai */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Šešėlis aplink foną */
+}
+
+
+/* Color change animation */
+@keyframes colorChange {
+    0% {
+        color: green;
+    }
+    50% {
+        color: rgb(48, 95, 64);
+    }
+    100% {
+        color: green;
+    }
+}
+
+.main-content {
+    margin-left: 250px;  /* Makes space for the sidebar */
+    margin-top: 20px;   /* Adjust this value to be the height of your fixed header and navbar */
+    padding: 20px;
+    min-height: 100vh;
+    text-align: center;
+}
+
+
+/* Slide-up and fade-in animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation for heading (h1) */
+.main-content h1 {
+    opacity: 0;
+    animation: fadeInUp 1.5s forwards 0.5s;
+}
+
+/* Animation for paragraph (p) */
+.main-content p {
+    opacity: 0;
+    animation: fadeInUp 1.5s forwards 1s;
+}
+
+/* Animation for image */
+.main-content img {
+    opacity: 0;
+    animation: fadeInUp 0.5s forwards 1.5s;
+}
+
+/* H1 stilius */
+.main-content h1 {
+    font-size: 2em;
+    
+    color: #333;
+}
+
+/* Paragrafo stilius */
+.main-content p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.header {
+    position: relative; /* Keep the header fixed */
+    top: 50px; /* Ensures it stays at the top */
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+
+/* Fono paveikslėlio stilius */
+.header::before {
+    content: ''; /* Sukuriame tuščią elementą */
+    position: absolute; /* Pozicionuojame jį už turinio */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('header_fon.jpg');
+    background-size: auto; /* Paveikslėlis bus rodomas savo natūraliais matmenimis */
+    background-position: center; /* Fonas bus centre */
+    filter: blur(5px); /* Paveikslėlio išblurinimas */
+    z-index: -1; /* Paveikslėlis bus už tekstų */
+    background-repeat: repeat; /* Paveikslėlis kartosis tiek horizontaliai, tiek vertikaliai */
+}
+
+/* Header tekstas */
+.header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.7); /* Šiek tiek permatomas baltas fonas */
+    padding: 10px;  /* Tarpai aplink tekstą */
+    border-radius: 1px;  /* Apvalūs kampai */
+    z-index: 1; /* Užtikrina, kad tekstas bus virš blur fono */
+}
+
+
+.header img {
+    width: 100%;
+    height: auto;
+    max-width: 1366px;
+    margin-right: 20px;
+    margin-left: 250px;
+    padding: 20px;
+    z-index: 1;
+    position: relative;
+    transform: scale(0.5); /* Pradžioje sumažintas */
+    opacity: 0; /* Pradžioje nematomas */
+    animation: scaleIn 2s ease-out forwards; /* Pridėta animacija */
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.8) translateY(10px); /* Šiek tiek mažesnis ir žemiau */
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0); /* Stabilioje vietoje */
+        opacity: 1;
+    }
+}
+
+
+
+
+
+/* Formos konteineris */
+.form-container {
+    color: #000;
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Užima visą plotį */
+    max-width: 400px; /* Maksimalus plotis - tiks, kad forma netaptų per plati */
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Kiti formos stiliai */
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Formos antraštė */
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Formos eilutės */
+.form-row {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Etiketės */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Įvesties laukeliai */
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Mygtukas */
+input[type="submit"] {
+    background: #012804;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #032804;
+}
+
+/* Mažas akcentas */
+.form-container p {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Paveikslėlio stilius */
+.main-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Bendras h1 stilius */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+
+
+
+
+.cart-icon {
+    display: flex;
+    justify-content: center; /* Piktograma centruojama horizontalioje kryptyje */
+    margin-top: 20px; /* Tarpo viršus */
+    margin-bottom: 20px; /* Tarpo apačia */
+    z-index: 20; /* Piktogramos sluoksnio prioritetas */
+    
+}
+
+.cart-icon img {
+    width: 240px; /* Paveikslėlio plotis */
+    height: auto; /* Automatinis aukštis */
+    transition: transform 0.5s ease; /* Sklandus užvedimo efektas */
+}
+
+.cart-icon img:hover {
+    transform: scale(1.5); /* Paveikslėlis padidės užvedus pelę */
+
+
+       
+}
+
+/* <!-- Stiliai --> */
+
+    /* Nuorodos į visas prekes stilius */
+    .all-products-link {
+        display: inline-block;
+        margin: 1rem 0;
+        padding: 0.5rem 1rem;
+        background-color: #000000;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 0.3rem;
+        font-size: 1.1rem;
+    }
+
+    .all-products-link:hover {
+        background-color: #ABA68D;
+    }
+
+    /* Flexbox forma */
+    .filter-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: flex-end;
+    }
+
+    .filter-form div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-form label {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+        background-color: #f0f0f0;
+    }
+
+    .filter-form select,
+    .filter-form input {
+        padding: 0.4rem;
+        font-size: 1rem;
+    }
+
+    .filter-form button {
+        padding: 0.5rem 1rem;
+        background-color: #16181a;
+        color: white;
+        border: none;
+        border-radius: 0.3rem;
+        cursor: pointer;
+    }
+
+    .filter-form button:hover {
+        background-color: #131415;
+    }
+
+    .products ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .products li {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .customer-dashboard {
+        margin: 20px auto;
+        margin-top: -350px;
+        max-width: 1200px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Pagrindinis puslapio pavadinimas */
+    .customer-dashboard h1 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    /* Paskyros aprašymas */
+    .customer-dashboard p {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+    
+    /* Akcijų blokai */
+    .customer-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    /* Kiekvienas veiksmo blokas */
+    .customer-actions > div {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Pavadinimas kiekviename bloke */
+    .customer-actions h2 {
+        font-size: 22px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+    
+    /* Balanso informacija */
+    .balance-info p {
+        font-size: 18px;
+        color: #007bff;
+    }
+    
+    /* Papildymo forma */
+    .add-balance input,
+    .add-balance button {
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .add-balance button {
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;
+    }
+    
+    .add-balance button:hover {
+        background-color: #218838;
+    }
+    
+    /* Užsakymų istorijos sąrašas */
+    .order-history ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .order-history li {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    
+    .order-history p {
+        font-size: 16px;
+        color: #888;
+    }
+    .welcome-message {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        padding: 10px;
+        background-color: #272424;
+        border-radius: 5px;
+        margin: 10px 0;
+        text-align: center;
+            white-space: normal;  /* Užtikrina, kad tekstas bus pertraukiamas */
+            word-wrap: break-word; /* Padeda pertraukti žodžius, kad tilptų */
+            overflow-wrap: break-word; /* Alternatyvus būdas pertraukti žodžius */
+       
+        
+    }
+    
+    .welcome-message p {
+        margin: 0;
+    }
+    
+    
+    .welcome-message {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        padding: 10px;
+        background-color: #181616;
+        border-radius: 5px;
+        margin: 10px 0;
+        text-align: center;
+        position: relative;
+        animation: backgroundChange 4s ease-in-out forwards;    }
+
+        
+        @keyframes backgroundChange {
+            0% {
+                background-color: #000; /* Juodas fonas */
+            }
+            50% {
+                background-color: #fff; /* Baltas fonas */
+            }
+
+            }
+            .products ul {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .products li {
+                color: #000;
+                position: relative;
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                width: 300px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                transition: all 0.3s ease;
+                animation: fadeInUp 0.5s ease-out;
+            }
+            
+            .products li:hover {
+                transform: translateY(-15px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+            
+            .products li img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                margin-bottom: 15px;
+            }
+            
+            .products li h2 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+                color: #022316;
+            }
+            
+            .products li p {
+                margin: 10px 0;
+            }
+            
+            .products li p:last-of-type {
+                font-weight: bold;
+                color: #555;
+            }
+    
+/* <<<<<<< HEAD */
+    
+            .visiproduktai {
+                font-weight: bold;
+                color: #000000;
+            }
+/* ======= */
+        
+            body {
+                background: url('background-pattern.png') no-repeat center center fixed;
+                background-size: cover;
+                font-family: Arial, sans-serif;
+                color: #fff;
+                text-align: center;
+            }
+        
+            .admin-dashboard {
+                background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+                border-radius: 10px;
+                padding: 20px;
+                margin: 100px auto;
+                display: inline-block;
+                max-width: 400px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                margin-top: -300px;
+            }
+        
+            h1 {
+                font-size: 28px;
+                color: #ffffff;
+                margin-bottom: 15px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            }
+        
+            p {
+                font-size: 16px;
+                margin-bottom: 20px;
+                color: #dcdcdc;
+            }
+        
+            ul {
+                list-style: none;
+                padding: 0;
+            }
+        
+            li {
+                margin: 10px 0;
+            }
+        
+            a {
+                text-decoration: none;
+                background-color: #16181a;
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+                display: inline-block;
+            }
+        
+            a:hover {
+                background-color: #ABA68D;
+            }
+
+  /* General Container Styling */
+  .container {
+    color: #000;
+    display: flex;
+    flex-wrap: wrap; /* Leidžia elementams peržengti eilutės ribas, jei jų yra daugiau nei galima rodyti */
+    justify-content: space-between; /* Paskirsto erdvę tarp elementų */
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.container table {
+    width: 100%; /* Užtikrina, kad stalas užimtų visą vietą konteineryje */
+    border-collapse: collapse;
+}
+
+.container th, .container td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.container th {
+    background-color: #f4f4f4;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;  /* Apvalus paveikslėlis */
+    object-fit: cover;  /* Užtikrina, kad paveikslėlis bus tinkamai pritaikytas */
+    border: 2px solid #ddd;  /* Šviesus rėmelis aplink paveikslėlį */
+}
+
+
+
+
+/*     
+   
+<<<<<<< HEAD
+>>>>>>> b93360cc7d065effbad7e499d8ec53aee1df6fd2
+=======
+>>>>>>> Funkciju_su_puslapiu_apjungimas
+>>>>>>> 9ff5647f1e40ba1508871eafdbd5f8f3f44d6d42 */

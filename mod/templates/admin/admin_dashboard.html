@@ -1,0 +1,15 @@
+{% extends 'base.html' %}{% block content %}
+
+<div class="admin-dashboard">
+    <h1>Admin Meniu</h1>
+    <p>Sveiki, {{ current_user.username }}! Čia galite administruoti sistemą.</p>
+
+    <ul>
+        <li><a href="{{ url_for('admin.view_users') }}">Peržiūrėti vartotojus</a></li>
+        <li><a href="{{ url_for('admin.manage_products') }}">Tvarkyti prekes</a></li>
+        <li><a href="{{ url_for('admin.view_orders') }}">Peržiūrėti užsakymus</a></li>
+        <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
+    </ul>
+</div>
+
+{% endblock %}

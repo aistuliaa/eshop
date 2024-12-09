@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+    <title>{% block title %}Mano Svetainė{% endblock %}</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-content">
+            <img src="{{ url_for('static', filename='images/header.png') }}" alt="Puslapio galva">
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav>
+                <!-- <p>Sveiki, {% if session.get('username') %}{{ session.get('username') }}{% else %}Svečias{% endif %}</p> Pasveikinimas viršuje -->
+        <ul>
+            <li><a href="{{ url_for('home') }}">Pagrindinis</a></li>
+            {% if session.get('user_id') %}
+                <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
+                <li><a href="{{ url_for('registracija.register') }}">Registruotis</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('get_all_products') }}">Prekės</a></li>
+            {% if session.get('is_admin') %}
+                <li><a href="{{ url_for('admin.admin_dashboard') }}">Admin Meniu</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="cart-icon">
+            <a href="{{ url_for('pirkejas') }}"></a>
+                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Prekių krepšelis">
+            </a>
+        </div>
+        <h2 class="sidebar-title">Pirkėjo meniu</h2>
+        <div class="welcome-message">
+            <p>Sveiki, {% if session.get('username') %}{{ session.get('username') }}{% else %}Svečias{% endif %}</p>
+        </div>
+                <ul>
+            {% if session.get('user_id') %}
+                
+                <li><a href="{{ url_for('pirkejas') }}">Mano paskyra</a></li>
+                <li><a href="{{ url_for('logout') }}">Atsijungti</a></li>
+                <li><a href="{{ url_for('balansas') }}">Mano balansas</a></li>
+                <li><a href="{{ url_for('add_balansas') }}">Papildyti balansą</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Prisijungti</a></li>
+                <li><a href="{{ url_for('registracija.register') }}">Registruotis</a></li>
+            {% endif %}
+        </ul>
+        {% if session.get('is_admin') %}
+            <h2 class="sidebar-title">Admin meniu</h2>
+            <ul>
+                <li><a href="{{ url_for('admin.add_product') }}">Pridėti naują prekę</a></li>
+                <li><a href="{{ url_for('admin.update_stock') }}">Papildyti prekių kiekį</a></li>
+                <li><a href="{{ url_for('admin.remove_product') }}">Pašalinti prekę</a></li>
+                <li><a href="{{ url_for('admin.delete_user') }}">Ištrinti vartotoją</a></li>
+                <li><a href="{{ url_for('admin.product_stats') }}">Prekių statistika</a></li>          </ul>
+        {% endif %}
+    </div>
+
+    <!-- Flash Messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

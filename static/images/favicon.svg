@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <style>
+    .background {
+      animation: fillBackground 4s linear infinite;
+    }
+
+    /* Animation to fill the square with the desired color */
+    @keyframes fillBackground {
+      0% { fill: white; }
+      100% { fill: #ABA68D; }
+    }
+  </style>
+
+  <!-- Square that will fill with #ABA68D -->
+  <rect width="128" height="128" class="background"/>
+</svg>
