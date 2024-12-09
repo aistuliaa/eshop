@@ -33,6 +33,17 @@ def home():
 from flask import request, render_template
 from sqlalchemy import and_
 
+@app.route('/uzduotis/asmenine', methods=['GET', 'POST'])
+def personal_task():
+    app.logger.info('Endpoint "/uzduotis/asmenine" buvo iškviestas')
+    return '''
+    <h1>Personal Task Page</h1>
+    <p>Click the button below to go back to the main page.</p>
+    <form action="/" method="get">
+        <button type="submit">Go Back to Main Page</button>
+    </form>
+    '''
+
 @app.route('/cargo')
 def get_all_products():
     # Gauti užklausos parametrus
